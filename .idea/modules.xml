@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LoadBalancerServer/LoadBalancerServer.iml" filepath="$PROJECT_DIR$/LoadBalancerServer/LoadBalancerServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenMarket-Client/OpenMarket-Client.iml" filepath="$PROJECT_DIR$/OpenMarket-Client/OpenMarket-Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenMarket-Server/OpenMarket-Server.iml" filepath="$PROJECT_DIR$/OpenMarket-Server/OpenMarket-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenMarket-commons/OpenMarket-commons.iml" filepath="$PROJECT_DIR$/OpenMarket-commons/OpenMarket-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frameworkobsobs/frameworkobsobs.iml" filepath="$PROJECT_DIR$/frameworkobsobs/frameworkobsobs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/openMarket.iml" filepath="$PROJECT_DIR$/.idea/openMarket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strategyserver/strategyserver.iml" filepath="$PROJECT_DIR$/strategyserver/strategyserver.iml" />
+    </modules>
+  </component>
+</project>

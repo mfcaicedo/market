@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="LoadBalancerServer" />
+        <module name="strategyserver" />
+        <module name="frameworkobsobs" />
+        <module name="OpenMarket-Client" />
+        <module name="OpenMarket-commons" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="frameworkobsobs" target="1.8" />
+      <module name="LoadBalancerServer" target="1.8" />
+      <module name="OpenMarket-Client" target="1.8" />
+      <module name="OpenMarket-commons" target="1.8" />
+      <module name="OpenMarket-Server" target="1.8" />
+      <module name="strategyserver" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

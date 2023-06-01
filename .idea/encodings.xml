@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/LoadBalancerServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LoadBalancerServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-Client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-Client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-Server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OpenMarket-commons/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/frameworkobsobs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/frameworkobsobs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/strategyserver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/strategyserver/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
