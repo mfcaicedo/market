@@ -26,9 +26,9 @@ public class ShoppingRepository implements IShoppingRepository {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS shopping (\n"
                 + "      shoppingId integer PRIMARY KEY AUTOINCREMENT,\n"
-                + "      userBuyerId integer NOT NULL\n"
-                + "      productId integer NOT NULL\n"
-                + "      FOREIGN KEY (userBuyerId) REFERENCES users(userId)\n"
+                + "      userBuyerId integer NOT NULL,\n"
+                + "      productId integer NOT NULL,\n"
+                + "      FOREIGN KEY (userBuyerId) REFERENCES users(userId),\n"
                 + "      FOREIGN KEY (productId) REFERENCES products(pruductId)\n"
                 + ");";
         try {

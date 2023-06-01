@@ -1,8 +1,8 @@
 package co.unicauca.openmarket.client.access;
 
 /**
- * Fabrica que se encarga de instanciar ProductAccessImplSockets o cualquier otro que
- se cree en el futuro.
+ * Fabrica que se encarga de instanciar ProductAccessImplSockets o cualquier
+ * otro que se cree en el futuro.
  *
  * @author Libardo, Julio
  */
@@ -33,7 +33,7 @@ public class Factory {
      * @param type cadena que indica qué tipo de clase hija debe instanciar
      * @return una clase hija de la abstracción IProductAccess
      */
-    public IProductAccess getRepository(String type) {
+    public IProductAccess getProductRepository(String type) {
 
         IProductAccess result = null;
 
@@ -41,14 +41,14 @@ public class Factory {
             case "default":
                 result = new ProductAccessImplSockets();
                 break;
-                
+
         }
 
         return result;
 
     }
-    
-        public ICategoryAccess getCatRepository(String type) {
+
+    public ICategoryAccess getCategoryRepository(String type) {
 
         ICategoryAccess result = null;
 
@@ -56,7 +56,67 @@ public class Factory {
             case "default":
                 result = new CategoryAccessImplSockets();
                 break;
-                
+
+        }
+
+        return result;
+
+    }
+
+    public ILocationAccess getLocationRepository(String type) {
+
+        ILocationAccess result = null;
+
+        switch (type) {
+            case "default":
+                result = new LocationAccessImplSockets();
+                break;
+
+        }
+
+        return result;
+
+    }
+
+    public IShoppingAccess getShoppingRepository(String type) {
+
+        IShoppingAccess result = null;
+
+        switch (type) {
+            case "default":
+                result = new ShoppingAccessImplSockets();
+                break;
+
+        }
+
+        return result;
+
+    }
+
+    public ISellerIncomeAccess getSellerIncomeRepository(String type) {
+
+        ISellerIncomeAccess result = null;
+
+        switch (type) {
+            case "default":
+                result = new SellerIncomeAccessImplSockets();
+                break;
+
+        }
+
+        return result;
+
+    }
+
+    public IUserAccess getUserRepository(String type) {
+
+        IUserAccess result = null;
+
+        switch (type) {
+            case "default":
+                result = new UserAccessImplSockets();
+                break;
+
         }
 
         return result;

@@ -1,5 +1,6 @@
 package co.unicauca.openmarket.server.infra.tcpip;
 import co.unicauca.openmarket.client.domain.Category;
+import co.unicauca.openmarket.client.domain.Location;
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.SellerIncome;
 import co.unicauca.openmarket.client.domain.Shopping;
@@ -83,6 +84,10 @@ public class OpenMarketHandler extends ServerHandler {
                     // Editar un producto
                     response = processEditproduct(protocolRequest);
                 }
+                if (protocolRequest.getAction().equals("delete")){
+                    // Eliminar un producto
+                    response = processDeleteProduct(protocolRequest);
+                }
                 if (protocolRequest.getAction().equals("findAll")){
                     // listar productos
                     response = processfinAllproduct();
@@ -90,6 +95,10 @@ public class OpenMarketHandler extends ServerHandler {
                 if (protocolRequest.getAction().equals("findAllBySearch")){
                     // Busqueda por nombre y descripcion en productos
                     response = processfindAllByNameAndDescription(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("findAllByUserSeller")){
+                    // Busqueda por nombre y descripcion en productos
+                    response = processfindAllByUserSeller(protocolRequest);
                 }
                 break;
             case "user":
@@ -117,6 +126,12 @@ public class OpenMarketHandler extends ServerHandler {
                 if (protocolRequest.getAction().equals("findAllSellerIncome")){
                     // listar ganancias
                     response = processFindAllSellerIncome();
+                }
+                break;
+            case "location":
+                if (protocolRequest.getAction().equals("findAllLocation")){
+                    // listar ubicaciones
+                    response = processFindAllLocation();
                 }
                 break;
         }
@@ -263,11 +278,30 @@ public class OpenMarketHandler extends ServerHandler {
      * @param protocolRequest
      * @return 
      */
-    private String processfindAllByNameAndDescription(Protocol protocolRequest){
+    private String processfindAllByNameAndDescription(Protocol protocolRequest) {
         String search = protocolRequest.getParameters().get(0).getValue();
         List<Product> products;
         products = serviceProduc.findAllByNameAndDescription(search);
         return objectToJSON(products);
+    }
+    
+    private String processfindAllByUserSeller(Protocol protocolRequest){
+        Long userSellerId = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        List<Product> products;
+        products = serviceProduc.findByUserSeller(userSellerId);
+        return objectToJSON(products);
+    }
+    
+    /**
+     * Controlador que invoca el servicio de eliminar producto por Id
+     * @param protocolRequest
+     * @return 
+     */
+    private String processDeleteProduct(Protocol protocolRequest){
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+       boolean response = serviceProduc.delete(id);
+       String respuesta=String.valueOf(response);
+       return respuesta;
     }
     /**
      * Controlador que invoca el servicio de login
@@ -289,9 +323,9 @@ public class OpenMarketHandler extends ServerHandler {
     private String processSaveShopping(Protocol protocolRequest){
         Shopping shopping = new Shopping();
         // Reconstruir el prodcucto  a partir de lo que viene en los parámetros
-        shopping.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
-        shopping.setUserBuyerId(Long.parseLong(protocolRequest.getParameters().get(2).getValue()));
-        shopping.setProductId(Long.parseLong(protocolRequest.getParameters().get(3).getValue()));
+        shopping.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        shopping.setUserBuyerId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
+        shopping.setProductId(Long.parseLong(protocolRequest.getParameters().get(2).getValue()));
         
         boolean response = serviceShopping.save(shopping);
         String respuesta = String.valueOf(response);
@@ -313,9 +347,9 @@ public class OpenMarketHandler extends ServerHandler {
     private String processSaveSellerIncome(Protocol protocolRequest){
         SellerIncome seller = new SellerIncome();
         // Reconstruir el prodcucto  a partir de lo que viene en los parámetros
-        seller.setSellerIncomeId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
-        seller.setIncome(Double.parseDouble(protocolRequest.getParameters().get(2).getValue()));
-        seller.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(3).getValue()));
+        seller.setSellerIncomeId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        seller.setIncome(Double.parseDouble(protocolRequest.getParameters().get(1).getValue()));
+        seller.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(2).getValue()));
         
         boolean response = serviceSellerIncome.save(seller);
         String respuesta = String.valueOf(response);
@@ -329,6 +363,12 @@ public class OpenMarketHandler extends ServerHandler {
         List<SellerIncome> sellers;
         sellers = serviceSellerIncome.findAll();
        return objectToJSON(sellers);
+    }
+    
+    private String processFindAllLocation(){
+        List<Location> locations;
+        locations = serviceLocation.findAll();
+       return objectToJSON(locations);
     }
     
     /**

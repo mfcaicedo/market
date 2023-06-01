@@ -93,8 +93,8 @@ public class ProductRepository implements IProductRepository {
                 + "     categoryId integer,\n"
                 + "     locationId integer NULL,\n"
                 + "     userSellerId integer NULL,\n"
-                + "     FOREIGN KEY (categoryId) REFERENCES categories(categoryId)\n"
-                + "     FOREIGN KEY (locationId) REFERENCES location(locationId)\n"
+                + "     FOREIGN KEY (categoryId) REFERENCES categories(categoryId),\n"
+                + "     FOREIGN KEY (locationId) REFERENCES location(locationId),\n"
                 + "     FOREIGN KEY (userSellerId) REFERENCES users(userId)\n"
                 + ");";
 
@@ -113,7 +113,7 @@ public class ProductRepository implements IProductRepository {
         // SQLite connection string
         //String url = "jdbc:sqlite:./myDatabase.db"; //Para Linux/Mac
         //String url = "jdbc:sqlite:C:/sqlite/db/myDatabase.db"; //Para Windows
-        String url = "jdbc:sqlite::memory:market";
+        String url = "jdbc:sqlite::memory:";
 
         try {
             conn = DriverManager.getConnection(url);
@@ -330,6 +330,38 @@ public class ProductRepository implements IProductRepository {
         }
 
         return products;
+    }
+
+    @Override
+    public List<Product> findByUserSeller(Long id) {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM products  "
+                    + "WHERE userSellerId = ? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            
+
+            ResultSet res = pstmt.executeQuery();
+            while (res.next()) {
+                Product prod = new Product();
+                prod.setProductId(res.getLong("productId"));
+                prod.setName(res.getString("name"));
+                prod.setDescription(res.getString("description"));
+                prod.setPrice(res.getDouble("price"));
+                prod.setStock(res.getInt("stock"));
+                prod.setCategoryId(res.getLong("categoryId"));
+                prod.setLocation(res.getLong("locationId"));
+                prod.setUserSellerId(res.getLong("userSellerId"));
+                products.add(prod);
+            }
+            return products;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

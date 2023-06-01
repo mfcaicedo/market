@@ -20,8 +20,10 @@ public interface IProductAccess {
     Product findById(Long id)throws Exception;
     
    List<Product> findByName(String pname);
+   List<Product> findByUserSeller(Long id);
     List<Product> findByCategory(String categoryName);
     List<Product> findAll();
+    List<Product> findAllByNameAndDescription(String search);
     
 
 }

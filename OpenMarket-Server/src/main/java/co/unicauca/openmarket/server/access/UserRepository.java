@@ -41,7 +41,7 @@ public class UserRepository implements IUserRepository{
                 + "     role text NOT NULL,\n"
                 + "     billingType text NULL,\n"
                 + "     birthdate text NULL,\n"
-                + "     score real NULL,\n"
+                + "     score real NULL\n"
                 + ");";
         try {
             this.connect();
@@ -103,7 +103,7 @@ public class UserRepository implements IUserRepository{
             pstmt.setString(5, "tmunoz@gmail.com");
             pstmt.setInt(6, 32345);
             pstmt.setString(7, UserRole.COMPRADOR.toString());
-            pstmt.setString(9, "2002-01-20");
+            pstmt.setString(8, "2002-01-20");
             pstmt.executeUpdate();
             
         } catch (SQLException ex) {
@@ -175,7 +175,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public User findByUsernameAndPassword(String username, String password) {
          try {
-            String sql = "SELECT * FROM user "
+            String sql = "SELECT * FROM users "
                     + "WHERE username = ? AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
