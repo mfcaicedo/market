@@ -30,7 +30,7 @@ public class UserRepository implements IUserRepository{
     }
     private void initDatabase() {
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
+        String sql = "CREATE TABLE IF NOT EXISTS users ( \n"
                 + "	userId integer PRIMARY KEY AUTOINCREMENT,\n"
                 + "	name text NOT NULL,\n"
                 + "	lastname text NULL,\n"
@@ -41,7 +41,7 @@ public class UserRepository implements IUserRepository{
                 + "     role text NOT NULL,\n"
                 + "     billingType text NULL,\n"
                 + "     birthdate text NULL,\n"
-                + "     score real NULL,\n"
+                + "     score real NULL\n"
                 + ");";
         try {
             this.connect();
@@ -103,7 +103,7 @@ public class UserRepository implements IUserRepository{
             pstmt.setString(5, "tmunoz@gmail.com");
             pstmt.setInt(6, 32345);
             pstmt.setString(7, UserRole.COMPRADOR.toString());
-            pstmt.setString(9, "2002-01-20");
+            pstmt.setString(8, "2002-01-20");
             pstmt.executeUpdate();
             
         } catch (SQLException ex) {

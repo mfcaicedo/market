@@ -75,7 +75,7 @@ public class LocationRepository implements ILocationRepository{
                 + "	locationId integer PRIMARY KEY,\n"
                 + "	latitude real NOT NULL,\n"
                 + "	longitude real NOT NULL,\n"
-                + "     place texr NOT NULL,\n"
+                + "     place texr NOT NULL\n"
                 + ");";
         try {
             this.connect();

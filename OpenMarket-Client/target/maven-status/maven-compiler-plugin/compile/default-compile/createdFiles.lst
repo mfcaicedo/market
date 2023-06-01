@@ -1,2 +1,6 @@
 co\unicauca\openmarket\client\domain\services\CategoryService.class
+co\unicauca\openmarket\client\domain\SellerIncome.class
+co\unicauca\openmarket\client\domain\UserRole.class
+co\unicauca\openmarket\client\domain\Shopping.class
+co\unicauca\openmarket\client\presentation\GUILogin.class
 co\unicauca\openmarket\client\access\CategoryAccessImplSockets$1.class

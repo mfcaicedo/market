@@ -1,15 +1,13 @@
 package co.unicauca.openmarket.client.access;
 
 /**
- * Fabrica que se encarga de instanciar ProductAccessImplSockets o cualquier otro que
- se cree en el futuro.
+ * Fabrica que se encarga de instanciar ProductAccessImplSockets o cualquier
+ * otro que se cree en el futuro.
  *
  * @author Libardo, Julio
  */
 public class Factory {
-
     private static Factory instance;
-
     private Factory() {
     }
 
@@ -34,21 +32,16 @@ public class Factory {
      * @return una clase hija de la abstracción IProductAccess
      */
     public IProductAccess getRepository(String type) {
-
         IProductAccess result = null;
-
         switch (type) {
             case "default":
                 result = new ProductAccessImplSockets();
                 break;
-                
         }
-
         return result;
-
     }
-    
-        public ICategoryAccess getCatRepository(String type) {
+
+    public ICategoryAccess getCatRepository(String type) {
 
         ICategoryAccess result = null;
 
@@ -56,7 +49,7 @@ public class Factory {
             case "default":
                 result = new CategoryAccessImplSockets();
                 break;
-                
+
         }
 
         return result;

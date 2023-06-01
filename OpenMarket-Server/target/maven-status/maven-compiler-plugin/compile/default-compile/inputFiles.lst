@@ -8,9 +8,9 @@ D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\client\domain\Product.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\ICategoryRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\ShoppingRepository.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\ISellerIncomeRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\LocationRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\CategoryRepository.java
-D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\SellerIncomeRepositoy.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\client\domain\UserRole.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\UserRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\client\domain\User.java
@@ -22,9 +22,9 @@ D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\client\domain\Category.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\IProductRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\ProductRepositoryArrays.java
-D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\ISellerIncomeRepositoy.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\infra\tcpip\OpenMarketHandler.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\CategoryRepositoryArrays.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\SellerIncomeRepository.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\infra\tcpip\OpenMarketServer.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\domain\services\LocationService.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Server\src\main\java\co\unicauca\openmarket\server\access\IUserRepository.java

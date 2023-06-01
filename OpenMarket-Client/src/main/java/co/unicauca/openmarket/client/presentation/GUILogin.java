@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.openmarket.client.presentation;
 
 /**
  *
- * @author HP
+ * @author 
  */
 public class GUILogin extends javax.swing.JFrame {
 
@@ -45,16 +40,29 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MARKET PLACE");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Inicio de sesión");
 
+        jlabelUsername.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelUsername.setText("Username:");
 
+        jlabelPassword.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelPassword.setText("Password:");
 
         jButtonLogin.setText("Iniciar sesión");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
 
         jButtonLoginInvitado.setText("Iniciar como invitado");
+        jButtonLoginInvitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginInvitadoActionPerformed(evt);
+            }
+        });
 
         jlabelUsername2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelUsername2.setText("Si no estás registrado puedes iniciar como invitado");
@@ -69,13 +77,13 @@ public class GUILogin extends javax.swing.JFrame {
                     .addComponent(jtxtPassword)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jlabelUsername)
                             .addComponent(jlabelPassword)
                             .addComponent(jButtonLogin)
                             .addComponent(jButtonLoginInvitado)
                             .addComponent(jlabelUsername2))
-                        .addGap(0, 234, Short.MAX_VALUE)))
+                        .addGap(0, 234, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -135,7 +143,7 @@ public class GUILogin extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(232, 232, 232)
@@ -145,6 +153,22 @@ public class GUILogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    /**
+     * Acción del boton para iniciar sesión.
+     * @param evt evento que dispara la acción.
+     */
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonLoginActionPerformed
+    /**
+     * Acción del boton para iniciar sesión como invitado
+     * @param evt evento que dispara la acción. 
+     */
+    private void jButtonLoginInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginInvitadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLoginInvitadoActionPerformed
 
     /**
      * @param args the command line arguments

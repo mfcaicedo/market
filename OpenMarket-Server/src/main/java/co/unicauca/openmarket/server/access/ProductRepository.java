@@ -113,7 +113,7 @@ public class ProductRepository implements IProductRepository {
         // SQLite connection string
         //String url = "jdbc:sqlite:./myDatabase.db"; //Para Linux/Mac
         //String url = "jdbc:sqlite:C:/sqlite/db/myDatabase.db"; //Para Windows
-        String url = "jdbc:sqlite::memory:market";
+        String url = "jdbc:sqlite::memory:";
 
         try {
             conn = DriverManager.getConnection(url);

@@ -1,7 +1,7 @@
 co\unicauca\openmarket\server\access\IShoppingRepository.class
 co\unicauca\openmarket\client\domain\Shopping.class
 co\unicauca\openmarket\server\domain\services\ShoppingService.class
-co\unicauca\openmarket\server\access\SellerIncomeRepositoy.class
+co\unicauca\openmarket\server\access\ISellerIncomeRepository.class
 co\unicauca\openmarket\client\domain\User.class
 co\unicauca\openmarket\server\access\ILocationRepository.class
 co\unicauca\openmarket\server\access\ProductRepository.class
@@ -22,9 +22,9 @@ co\unicauca\openmarket\server\domain\services\SellerIncomeService.class
 co\unicauca\openmarket\client\domain\UserRole.class
 co\unicauca\openmarket\server\access\ShoppingRepository.class
 co\unicauca\openmarket\client\domain\Location.class
+co\unicauca\openmarket\server\access\SellerIncomeRepository.class
 co\unicauca\openmarket\client\domain\Product.class
 co\unicauca\openmarket\server\access\Factory.class
 co\unicauca\openmarket\server\access\CategoryRepository.class
 co\unicauca\openmarket\server\access\ProductRepositoryArrays.class
-co\unicauca\openmarket\server\access\ISellerIncomeRepositoy.class
 co\unicauca\openmarket\server\domain\services\CategoryService.class
