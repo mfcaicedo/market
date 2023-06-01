@@ -1,22 +1,37 @@
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUILogin.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\SellerIncome.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\ProductService.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\main\Main.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIProducts.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\CategoryAccessImplSockets.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ICategoryAccess.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\infra\Messages.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\infra\OpenMarketSocket.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\CategoryService.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\UserRole.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\Factory.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUICategory.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUICategoriesFind.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Location.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ProductAccessImplSockets.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\User.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Shopping.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIProductsFind.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Category.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Product.java
-C:\Users\Personal\Desktop\ING SISTEMAS\Trabajos extra\market\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\IProductAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\infra\Messages.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\main\Main.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ILocationAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIProductsFind.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GuiUserSeller.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ShoppingAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\ProductService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\User.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\IProductAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\SellerIncome.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\Factory.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\ShoppingService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\LocationService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUICategoriesFind.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUICategory.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\SellerIncomeService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ICategoryAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIProducts.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Category.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\LocationAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIUserBuyer.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ProductAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\CategoryService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\SellerIncomeAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\IUserAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Shopping.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Location.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUILogin.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\infra\OpenMarketSocket.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\CategoryAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Product.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ISellerIncomeAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\IShoppingAccess.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\JPanelAddProduct.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\UserService.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\UserAccessImplSockets.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\UserRole.java

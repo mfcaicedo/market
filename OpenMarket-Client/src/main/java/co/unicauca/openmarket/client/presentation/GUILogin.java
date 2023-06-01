@@ -59,11 +59,13 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MARKET PLACE");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Inicio de sesión");
 
+        jlabelUsername.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelUsername.setText("Username:");
 
+        jlabelPassword.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelPassword.setText("Password:");
 
         jButtonLogin.setText("Iniciar sesión");
@@ -147,7 +149,7 @@ public class GUILogin extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

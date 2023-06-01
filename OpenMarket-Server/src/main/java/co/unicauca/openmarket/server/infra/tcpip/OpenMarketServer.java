@@ -1,9 +1,7 @@
 package co.unicauca.openmarket.server.infra.tcpip;
 import co.unicauca.openmarket.server.access.CategoryRepository;
-import co.unicauca.openmarket.server.access.CategoryRepositoryArrays;
 import co.unicauca.openmarket.server.access.LocationRepository;
 import co.unicauca.openmarket.server.access.ProductRepository;
-import co.unicauca.openmarket.server.access.ProductRepositoryArrays;
 import co.unicauca.openmarket.server.access.SellerIncomeRepository;
 import co.unicauca.openmarket.server.access.ShoppingRepository;
 import co.unicauca.openmarket.server.access.UserRepository;

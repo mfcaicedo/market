@@ -24,8 +24,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-       IProductAccess repositoryProduct = Factory.getInstance().getProductRepository("default");
+        IProductAccess repositoryProduct = Factory.getInstance().getProductRepository("default");
         ICategoryAccess repositoryCategory =  Factory.getInstance().getCategoryRepository("default");
         ILocationAccess repositoryLocation =  Factory.getInstance().getLocationRepository("default");
         IShoppingAccess repositoryShopping =  Factory.getInstance().getShoppingRepository("default");
@@ -34,15 +33,43 @@ public class Main {
         
         
         ProductService productService = new ProductService(repositoryProduct);
-        CategoryService categoryService=new CategoryService(repositoryCategory);
-        LocationService locationService=new LocationService(repositoryLocation);
-        ShoppingService shoppingService=new ShoppingService(repositoryShopping);
+        CategoryService categoryService = new CategoryService(repositoryCategory);
+        LocationService locationService = new LocationService(repositoryLocation);
+        ShoppingService shoppingService = new ShoppingService(repositoryShopping);
         UserService userService=new UserService(repositoryUser);
-        SellerIncomeService sellerIncomeService=new SellerIncomeService(repositorySellerIncome);
+        SellerIncomeService sellerIncomeService = new SellerIncomeService(repositorySellerIncome);
         
-        GUILogin guiLogin = new GUILogin(userService,productService);
-        guiLogin.setVisible(true);
-        guiLogin.setLocationRelativeTo(null); //centrar panel
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                GUILogin guiLogin = new GUILogin(userService,productService);
+                guiLogin.setVisible(true);
+                guiLogin.setLocationRelativeTo(null); //centrar panel
+            }
+        });
+    }
 
 //        GUICategory instance1=new GUICategory(categoryService);
 //        instance1.setVisible(true);
@@ -52,8 +79,5 @@ public class Main {
 //        instance2.setVisible(true);
 //        instance2.setSize(596, 380);
 //        instance2.setLocation(590, 0);
-
             
-    }
-    
 }
