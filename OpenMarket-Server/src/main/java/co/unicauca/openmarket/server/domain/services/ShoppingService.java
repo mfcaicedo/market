@@ -24,27 +24,27 @@ public class ShoppingService {
         this.repo = repo;
     }
 
-    public boolean save(Shopping shopping) {
+    public synchronized boolean save(Shopping shopping) {
         return repo.save(shopping);
     }
 
-    public boolean edit(Long id, Shopping shopping) {
+    public synchronized boolean edit(Long id, Shopping shopping) {
         return repo.edit(id, shopping);
     }
 
-    public boolean delete(Long id) {
+    public synchronized boolean delete(Long id) {
         return repo.delete(id);
     }
 
-    public Shopping findById(Long id) {
-        return repo.findById(id);
+    public synchronized Shopping findByProductId(Long productId) {
+        return repo.findByproductId(productId);
     }
 
-    public List<Shopping> findAll() {
+    public synchronized List<Shopping> findAll() {
         return repo.findAll();
     }
 
-    public List<Shopping> findByName(String name) {
+    public synchronized List<Shopping> findByName(String name) {
         return repo.findByName(name);
     }
 }

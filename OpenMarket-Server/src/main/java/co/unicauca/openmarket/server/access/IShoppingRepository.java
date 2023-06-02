@@ -14,7 +14,7 @@ public interface IShoppingRepository {
    
     boolean delete(Long id);
    
-    Shopping findById(Long id);
+    public Shopping findByproductId(Long productid);
    
     List<Shopping> findAll();
    

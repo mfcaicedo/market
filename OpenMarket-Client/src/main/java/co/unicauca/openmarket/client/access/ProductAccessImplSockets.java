@@ -146,14 +146,14 @@ public class ProductAccessImplSockets implements IProductAccess {
         if (jsonResponse == null) {
            
             throw new Exception("Oye No se pudo conectar con el servidor, por favor revisa la red o que el servidor esté escuchando.  ");
-//retura un valor null;
+
         } else {
             if (jsonResponse.contains(" Hay error")) {
                
                 Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                throw new Exception(extractMessages(jsonResponse));
                
-//retura un valor null;
+
             } else {
                 //Encontró el category
                 Product product = jsonToProduct(jsonResponse);
@@ -161,7 +161,6 @@ public class ProductAccessImplSockets implements IProductAccess {
                 return product;
             }
         } 
-        
         
     }
 

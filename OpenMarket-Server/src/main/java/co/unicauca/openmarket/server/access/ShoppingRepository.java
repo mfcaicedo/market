@@ -1,9 +1,11 @@
 package co.unicauca.openmarket.server.access;
 
+import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.Shopping;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -93,8 +95,36 @@ public class ShoppingRepository implements IShoppingRepository {
     }
 
     @Override
-    public Shopping findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Shopping findByproductId(Long productid) {
+    System.out.println("CONSULTA PELUCHES: "+productid);
+
+        try {
+            String sql = "SELECT * FROM shopping  "
+                    + "WHERE productId = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, productid);
+            
+
+            ResultSet res = pstmt.executeQuery();
+
+            if (res.next()) {
+                Shopping shopping = new Shopping();
+                System.out.println("CONSULTA PELUCHES: "+res.getLong("shoppingId"));
+                shopping.setShoppingId(res.getLong("shoppingId"));
+                shopping.setProductId(Long.parseLong(res.getString("productId")));
+                shopping.setUserBuyerId(Long.parseLong(res.getString("userBuyerId")));
+                
+                return shopping;
+            } else {
+                return null;
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

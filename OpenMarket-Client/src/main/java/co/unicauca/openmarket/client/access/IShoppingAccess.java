@@ -14,7 +14,7 @@ public interface IShoppingAccess {
    
     boolean delete(Long id);
    
-    Shopping findById(Long id);
+    public Shopping findByproductId(Long productid) throws Exception;
    
     List<Shopping> findAll();
    

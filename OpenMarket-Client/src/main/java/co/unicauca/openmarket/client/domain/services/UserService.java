@@ -30,7 +30,7 @@ public class UserService {
     public boolean delete(Long id){
         return repo.delete(id);
     }
-    public User findById(Long id){
+    public User findById(Long id) throws Exception{
         return repo.findById(id);
     }
     public List<User> findAll(){

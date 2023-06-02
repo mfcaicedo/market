@@ -141,7 +141,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public User findById(Long id) {
         try {
-            String sql = "SELECT * FROM user "
+            String sql = "SELECT * FROM users "
                     + "WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, id);

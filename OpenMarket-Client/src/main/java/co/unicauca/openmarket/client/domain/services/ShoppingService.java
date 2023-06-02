@@ -37,8 +37,8 @@ public class ShoppingService {
         return repo.delete(id);
     }
 
-    public Shopping findById(Long id) {
-        return repo.findById(id);
+    public Shopping findByProductId(Long productId) throws Exception{
+        return repo.findByproductId(productId) ;
     }
 
     public List<Shopping> findAll() {

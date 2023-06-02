@@ -13,8 +13,10 @@ import co.unicauca.openmarket.client.domain.services.ProductService;
 import co.unicauca.openmarket.client.domain.services.SellerIncomeService;
 import co.unicauca.openmarket.client.domain.services.ShoppingService;
 import co.unicauca.openmarket.client.domain.services.UserService;
+import co.unicauca.openmarket.client.infra.Messages;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -211,19 +213,36 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
             //this.product.setStock(this.product.getStock() - 1);
             this.productService.editProduct(product);
             
+            Shopping shoppingFind = this.shoppingService.findByProductId(product.getProductId());
             
-            System.out.println("shopping: " + shopping.getShoppingId());
-            System.out.println("shopping: " + shopping.getProductId());
-            System.out.println("shopping: " + shopping.getUserBuyerId());
             
             //TODO 3. guardar la comisión.
             Double commission = 0.12 * product.getPrice();
             SellerIncome sellerIncome = new SellerIncome();
             sellerIncome.setIncome(commission);
-            sellerIncome.setShoppingId(this.shopping.getShoppingId());
-            this.sellerIncomeService.save(sellerIncome);
+            sellerIncome.setShoppingId(shoppingFind.getShoppingId());
+            
+            boolean bandera=this.sellerIncomeService.save(sellerIncome);
+            
             
             //TODO 4. Llamar a un jDialog para la puntuación.
+            int result = JOptionPane.showConfirmDialog(this, " Deseas puntuar al vendedor? ", "Puntuador comprador", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+            
+                if(bandera){
+                
+                    JDialogScore objJDScore = new JDialogScore(this,false, this.userService,product.getUserSellerId());
+                    objJDScore.setVisible(true);
+                    objJDScore.setLocationRelativeTo(null);
+
+                    //this.dispose();
+                
+                }else{
+                
+                }
+            
+            } 
+            
             
         } catch (Exception ex) {
             Logger.getLogger(JDialogPaymentgateway.class.getName()).log(Level.SEVERE, null, ex);

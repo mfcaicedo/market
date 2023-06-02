@@ -9,7 +9,6 @@ import co.unicauca.openmarket.commons.infra.Protocol;
 import co.unicauca.openmarket.server.domain.services.CategoryService;
 import co.unicauca.strategyserver.infra.ServerHandler;
 import co.unicauca.openmarket.commons.infra.JsonError;
-import co.unicauca.openmarket.server.access.UserRepository;
 import co.unicauca.openmarket.server.domain.services.LocationService;
 import co.unicauca.openmarket.server.domain.services.ProductService;
 import co.unicauca.openmarket.server.domain.services.SellerIncomeService;
@@ -106,6 +105,10 @@ public class OpenMarketHandler extends ServerHandler {
                     // autenticacion
                     response = processLoginUser(protocolRequest);
                 }
+                if (protocolRequest.getAction().equals("findById")){
+                    // autenticacion
+                    response = processFindByIdUser(protocolRequest);
+                }
                 if (protocolRequest.getAction().equals("editScore")){
                     // listar compras
                     response = processScoreSeller(protocolRequest);
@@ -119,6 +122,10 @@ public class OpenMarketHandler extends ServerHandler {
                 if (protocolRequest.getAction().equals("findAllShopping")){
                     // listar compras
                     response = processFindAllShopping();
+                }
+                if (protocolRequest.getAction().equals("findByProductId")){
+                    System.out.println("SI ENTRO DONDE ERA");
+                    response = processFindByProductIdShopping(protocolRequest);
                 }
                 
                 break;
@@ -219,6 +226,30 @@ public class OpenMarketHandler extends ServerHandler {
             return errorJson;
         } else {
             return objectToJSON(producto);
+        }
+    }
+    
+    private String processFindByProductIdShopping(Protocol protocolRequest){
+        Long productId = Long.parseLong(protocolRequest.getParameters().get(0).getValue()) ;
+        System.out.println("QUE LLEGA AL PRODUCT ID: "+productId);
+        Shopping shopping = serviceShopping.findByProductId(productId);
+        if (shopping == null) {
+            String errorJson = generateNotFoundErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(shopping);
+        }
+    }
+    
+    private String processFindByIdUser(Protocol protocolRequest){
+        Long UserId = Long.parseLong(protocolRequest.getParameters().get(0).getValue()) ;
+        System.out.println("QUE LLEGA AL USER ID: "+UserId);
+        User user = serviceUser.findById(UserId);
+        if (user == null) {
+            String errorJson = generateNotFoundErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(user);
         }
     }
     /**

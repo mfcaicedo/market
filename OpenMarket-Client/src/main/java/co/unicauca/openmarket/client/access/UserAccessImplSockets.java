@@ -1,5 +1,6 @@
 package co.unicauca.openmarket.client.access;
 
+import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.User;
 import co.unicauca.openmarket.client.infra.OpenMarketSocket;
 import co.unicauca.openmarket.commons.infra.JsonError;
@@ -71,8 +72,60 @@ public class UserAccessImplSockets implements IUserAccess{
     }
 
     @Override
-    public User findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User findById(Long id) throws Exception {
+        String jsonResponse = null;
+        String requestJson = doFindUserIdRequestJson(id);
+        System.out.println(requestJson);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendRequest(requestJson);
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+           
+            
+                throw new Exception("Oye No se pudo conectar con el servidor, por favor revisa la red o que el servidor esté escuchando.  ");
+            
+
+        } else {
+            if (jsonResponse.contains(" Hay error")) {
+               
+                Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                
+                    throw new Exception(extractMessages(jsonResponse));
+                
+               
+
+            } else {
+                //Encontró el category
+                User user = jsonToUser(jsonResponse);
+                Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
+                return user;
+            }
+        } 
+    }
+    
+    private User jsonToUser(String jsonUser) {
+
+        Gson gson = new Gson();
+        User user = gson.fromJson(jsonUser, User.class);
+        return user;
+
+    }
+    
+    private String doFindUserIdRequestJson(Long id) {
+       Protocol protocol = new Protocol();
+        protocol.setResource("user");
+        protocol.setAction("findById");
+        protocol.addParameter("UserId",id.toString());
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
     }
 
     @Override
@@ -141,13 +194,13 @@ public class UserAccessImplSockets implements IUserAccess{
         return requestJson;
     }
     
-    private User jsonToUser(String jsonUser) {
-
-        Gson gson = new Gson();
-        User user = gson.fromJson(jsonUser, User.class);
-        return user;
-
-    }
+//    private User jsonToUser(String jsonUser) {
+//
+//        Gson gson = new Gson();
+//        User user = gson.fromJson(jsonUser, User.class);
+//        return user;
+//
+//    }
     
     private String extractMessages(String jsonResponse) {
         JsonError[] errors = jsonToErrors(jsonResponse);
