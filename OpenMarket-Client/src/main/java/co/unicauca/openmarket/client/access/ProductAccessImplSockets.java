@@ -250,10 +250,13 @@ public class ProductAccessImplSockets implements IProductAccess {
         Protocol protocol = new Protocol();
         protocol.setResource("product");
         protocol.setAction("post");
-        protocol.addParameter("productId",newProduct.getProductId().toString());
+        //protocol.addParameter("productId",newProduct.getProductId().toString());
         protocol.addParameter("name",newProduct.getName());
         protocol.addParameter("description", newProduct.getDescription());
         protocol.addParameter("price", newProduct.getPrice().toString());
+        
+        System.out.println("PRUEBAAAAAAA: "+newProduct.getState());
+        
         protocol.addParameter("state", newProduct.getState());
         protocol.addParameter("stock", newProduct.getStock().toString());
         protocol.addParameter("CategoryId", newProduct.getCategoryId().toString());

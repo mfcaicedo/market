@@ -6,6 +6,8 @@
 package co.unicauca.openmarket.client.presentation;
 
 import co.unicauca.openmarket.client.domain.User;
+import co.unicauca.openmarket.client.domain.services.CategoryService;
+import co.unicauca.openmarket.client.domain.services.LocationService;
 import co.unicauca.openmarket.client.domain.services.ProductService;
 import co.unicauca.openmarket.client.domain.services.UserService;
 import co.unicauca.openmarket.client.infra.Messages;
@@ -21,15 +23,20 @@ public class GUILogin extends javax.swing.JFrame {
     
     private UserService userService;
     private ProductService productService;
+    private CategoryService categoryService;
+    private LocationService locationService;
     private User userLogin;
 
     /**
      * Creates new form GUILogin
      */
-    public GUILogin(UserService userService, ProductService productService) {
+    public GUILogin(UserService userService, ProductService productService,
+            CategoryService categoryService, LocationService locationService) {
         initComponents();
         this.userService = userService;
         this.productService= productService;
+        this.categoryService= categoryService;
+        this.locationService=locationService;
         userLogin = new User();
     }
 
@@ -227,11 +234,12 @@ public class GUILogin extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtUsername1;
     // End of variables declaration//GEN-END:variables
 
-    private void frameUserSeller(){
-        GuiUserSeller guiUserSeller = new GuiUserSeller(userLogin,productService);
+    private void frameUserSeller() throws Exception{
+        GuiUserSeller guiUserSeller = new GuiUserSeller(userLogin,productService, categoryService, locationService);
         guiUserSeller.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        guiUserSeller.setSize(300, 200);
+        
         guiUserSeller.setVisible(true);
+        guiUserSeller.setLocationRelativeTo(null);
     }
 
 

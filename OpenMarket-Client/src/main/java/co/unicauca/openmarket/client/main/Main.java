@@ -64,7 +64,7 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUILogin guiLogin = new GUILogin(userService,productService);
+                GUILogin guiLogin = new GUILogin(userService,productService, categoryService,locationService);
                 guiLogin.setVisible(true);
                 guiLogin.setLocationRelativeTo(null); //centrar panel
             }

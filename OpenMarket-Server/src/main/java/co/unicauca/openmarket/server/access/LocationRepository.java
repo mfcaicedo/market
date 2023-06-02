@@ -66,6 +66,7 @@ public class LocationRepository implements ILocationRepository{
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return locations;
     }
 
@@ -75,7 +76,7 @@ public class LocationRepository implements ILocationRepository{
                 + "	locationId integer PRIMARY KEY,\n"
                 + "	latitude real NOT NULL,\n"
                 + "	longitude real NOT NULL,\n"
-                + "     place texr NOT NULL\n"
+                + "     place text NOT NULL\n"
                 + ");";
         try {
             this.connect();

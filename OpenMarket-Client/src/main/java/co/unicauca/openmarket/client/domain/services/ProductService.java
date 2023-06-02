@@ -33,21 +33,9 @@ public class ProductService  {
     }
     
 
-    public boolean saveProduct(Long id,String name, String description,Long categoryId)throws Exception {
-        
-        Product newProduct = new Product();
-        newProduct.setProductId(id);
-        newProduct.setName(name);
-        newProduct.setDescription(description);
-        newProduct.setCategoryId(categoryId);
-        
-        
-        //Validate product
-        if (newProduct.getName().isEmpty() ) {
-            return false;
-        }
-
-        return repository.save(newProduct);
+    public boolean saveProduct(Product product)throws Exception {
+     
+        return repository.save(product);
 
     }
 

@@ -4,13 +4,20 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.Category;
+import co.unicauca.openmarket.client.domain.Location;
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.User;
 import co.unicauca.openmarket.client.domain.services.CategoryService;
 import co.unicauca.openmarket.client.domain.services.LocationService;
 import co.unicauca.openmarket.client.domain.services.ProductService;
+import co.unicauca.openmarket.client.infra.Messages;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,19 +30,29 @@ public class GuiUserSeller extends javax.swing.JFrame {
     private ProductService productService;
     private CategoryService categoryService;
     private LocationService locationService;
+    int FilaSelec = -1;
+
+    
+    List<Location> lstLocations;
+    List<Category> lstCategory;
+    
     /**
      * Creates new form GuiUserSeller
      */
-    public GuiUserSeller(User user, ProductService productService) {
+    public GuiUserSeller(User user, ProductService productService, CategoryService categoryService, LocationService locationService) throws Exception {
         
         initComponents();
         this.user = user;
         this.productService = productService;
+        this.categoryService= categoryService;
+        this.locationService= locationService;
+        this.lstLocations= new ArrayList<>();
+        this.lstCategory= new ArrayList<>();
+        getCategoryAndLocation();
         llenarTablaProductos();
     }
     
-    private void llenarTablaProductos() {
-        
+    private void llenarTablaProductos() throws Exception {
             List<Product> lstProducts = productService.findByUserSeller(user.getUserId());
             Object matriz [][] = new Object [lstProducts.size()][8];
             for(int i=0;i<lstProducts.size();i++) {
@@ -45,14 +62,70 @@ public class GuiUserSeller extends javax.swing.JFrame {
                 matriz [i][3] = lstProducts.get(i).getPrice();
                 matriz [i][4] = lstProducts.get(i).getState();
                 matriz [i][5] = lstProducts.get(i).getStock();
-                matriz [i][6] = lstProducts.get(i).getCategoryId();
-                matriz [i][7] = lstProducts.get(i).getLocation();
+                Category category = findCategory(lstProducts.get(i).getCategoryId());
+                matriz [i][6] = category.getName();
+                Location location = findLocation(lstProducts.get(i).getLocation());
+                matriz [i][7] = location.getPlace();
             }
             this.jTableProductos.setModel(new DefaultTableModel(
                                     matriz,
                 new String [] {"Codigo","Nombre","Descripcion","Precio","Estado",
                     "Cantidad","Categoria","Ubicacion"}
             )); 
+    }
+    
+    //FUNCION QUE ME PERMITE MODIFICAR UN ESTUDIANTE SELECCIONADO
+    public Product productSelected() {//posible modificacion
+        //RECUPERAMOS LA INFORMACION DE LA FILA SECCIONADA EN LA TABLA
+
+        FilaSelec = this.jTableProductos.getSelectedRow();
+        Product product = new Product();
+        if (FilaSelec >= 0) {
+            product.setProductId(Long.parseLong(this.jTableProductos.getValueAt(FilaSelec, 0).toString()));
+            product.setName(this.jTableProductos.getValueAt(FilaSelec, 1).toString());
+            product.setDescription(this.jTableProductos.getValueAt(FilaSelec, 2).toString());
+            product.setPrice(Double.parseDouble(this.jTableProductos.getValueAt(FilaSelec, 3).toString()));//recupero la informacion de la tabla 
+            product.setState(this.jTableProductos.getValueAt(FilaSelec, 4).toString());//recupero la informacion de la tabla 
+            product.setStock(Integer.parseInt(this.jTableProductos.getValueAt(FilaSelec, 5).toString()));//recupero la informacion de la tabla 
+            Category category = lstCategory.stream().filter(x -> x.getName().equals(this.jTableProductos.getValueAt(FilaSelec, 6).toString())).findFirst().orElse(null);
+            product.setCategoryId(category.getCategoryId());//recupero la informacion de la tabla 
+            Location location = lstLocations.stream().filter(x -> x.getPlace().equals(this.jTableProductos.getValueAt(FilaSelec, 7).toString())).findFirst().orElse(null);
+            product.setLocation((long)location.getLocationId());//recupero la informacion de la tabla 
+            product.setUserSellerId(user.getUserId());
+
+        } else {
+            product=null;
+        }
+        
+        return product;
+    }
+    
+    private Location findLocation(long locationId){
+       
+        Location location = null;
+        for (int i = 0; i < this.lstLocations.size(); i++) {
+            if(this.lstLocations.get(i).getLocationId() == (int) locationId){
+                location= this.lstLocations.get(i);
+                break;
+            }
+        }
+        return location;
+    }
+    
+    private Category findCategory(long categoryId){
+        Category category = null;
+        for (int i = 0; i < this.lstCategory.size(); i++) {
+            if(this.lstCategory.get(i).getCategoryId()==  categoryId){
+                category= this.lstCategory.get(i);
+                break;
+            }
+        }
+        return category;
+    }
+    
+    private void getCategoryAndLocation(){
+        this.lstLocations= locationService.findAll();
+        this.lstCategory= categoryService.findAllCategories();
     }
 
     /**
@@ -74,6 +147,7 @@ public class GuiUserSeller extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProductos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jButtonLlenarTabla = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButtonCerrarSesion = new javax.swing.JButton();
@@ -167,6 +241,13 @@ public class GuiUserSeller extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Listado de productos disponibles");
 
+        jButtonLlenarTabla.setText("Actualizar Tabla");
+        jButtonLlenarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLlenarTablaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -178,6 +259,10 @@ public class GuiUserSeller extends javax.swing.JFrame {
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jButtonLlenarTabla)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +271,9 @@ public class GuiUserSeller extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonLlenarTabla)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -256,24 +343,75 @@ public class GuiUserSeller extends javax.swing.JFrame {
      */
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
+       
+        try {
+            callPanelAddAndUpdateProduct(null);
+            llenarTablaProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        callPanelAddProduct(null);
     }//GEN-LAST:event_jButtonAgregarActionPerformed
     
-    private void callPanelAddProduct(Product objproduct){
-        JPanelAddProduct objJPAddProduct = new JPanelAddProduct(this.categoryService, this.locationService, this.user);
-        this.getContentPane().remove(this.jPanelCenter);
-        this.getContentPane().add(objJPAddProduct);
-        objJPAddProduct.setVisible(true);
+    private void callPanelAddAndUpdateProduct(Product objproduct){
+//        JPanelAddProduct objJPAddProduct = new JPanelAddProduct(this.categoryService, this.locationService, this.user);
+//        this.getContentPane().remove(this.jPanelCenter);
+//        this.getContentPane().add(objJPAddProduct);
+        
+        JDialogAddProduct objJDAddProduct = new JDialogAddProduct(this,false, categoryService,locationService,user, productService, objproduct);
+        objJDAddProduct.setVisible(true);
+        objJDAddProduct.setLocationRelativeTo(null);
         
     }
+    
+    private void disableProduct(Product product) throws Exception{
+        int result = JOptionPane.showConfirmDialog(this, " Deseas deshabilitar el producto? ", "Deshabilitar Producto", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            product.setState("Suspendido");
+            if(this.productService.editProduct(product)){
+                llenarTablaProductos();
+                Messages.showMessageDialog("Producto Actualizado exitosamente", "Atención");
+            }else{
+                Messages.showMessageDialog("ERROR al actualizar el producto", "Atención");
+            }
+            
+        } 
+    }
+    
+    private void deleteProduct(Product product) throws Exception{
+        int result = JOptionPane.showConfirmDialog(this, " Deseas eliminar el producto? ", "Deshabilitar Producto", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            
+            if(this.productService.deleteProduct(product.getProductId())){
+                llenarTablaProductos();
+                Messages.showMessageDialog("Producto Eliminado exitosamente", "Atención");
+            }else{
+                Messages.showMessageDialog("ERROR al eliminar el producto", "Atención");
+            }
+            
+        } 
+    }
+    
+    
     
     /**
      * Acción del boton de modificar un producto 
      * @param evt evento que dispara la acción. 
      */
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+        
+            Product productSelect = this.productSelected();
+            try {
+                if(productSelect!=null){
+                callPanelAddAndUpdateProduct(productSelect);
+                
+                    llenarTablaProductos();
+                }else{
+                Messages.showMessageDialog("ERROR! no ha seleccionado ninguna fila de la tabla", "Atención");
+                }     
+            }catch (Exception ex) {
+                    Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }//GEN-LAST:event_jButtonModificarActionPerformed
     
     /**
@@ -281,15 +419,35 @@ public class GuiUserSeller extends javax.swing.JFrame {
      * @param evt evento que dispara la acción. 
      */
     private void jButtonSuspenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuspenderActionPerformed
-        // TODO add your handling code here:
+        Product productSelect = this.productSelected();
+        try {
+            if(productSelect!=null){
+                disableProduct(productSelect);
+            }else{
+                Messages.showMessageDialog("ERROR! no ha seleccionado ninguna fila de la tabla", "Atención");
+            }
+        }catch (Exception ex) {
+                Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButtonSuspenderActionPerformed
     
+     
     /**
      * Acción del boton de eliminar un producto 
      * @param evt evento que dispara la acción. 
      */
     private void JButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonEliminarActionPerformed
-        // TODO add your handling code here:
+        Product productSelect = this.productSelected();
+        try {
+            if(productSelect!=null){
+                deleteProduct(productSelect);
+            }else{
+                Messages.showMessageDialog("ERROR! no ha seleccionado ninguna fila de la tabla", "Atención");
+            }
+        }catch (Exception ex) {
+                Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JButtonEliminarActionPerformed
     /**
      * Acción del boton de cerrar sesión 
@@ -299,6 +457,14 @@ public class GuiUserSeller extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
+
+    private void jButtonLlenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLlenarTablaActionPerformed
+        try {
+            llenarTablaProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonLlenarTablaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +505,7 @@ public class GuiUserSeller extends javax.swing.JFrame {
     private javax.swing.JButton JButtonEliminar;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonLlenarTabla;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonSuspender;
     private javax.swing.JLabel jLabel1;

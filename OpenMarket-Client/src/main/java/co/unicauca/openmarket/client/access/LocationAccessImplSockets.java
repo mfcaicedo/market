@@ -47,7 +47,7 @@ public class LocationAccessImplSockets implements ILocationAccess{
     
      private String doListLocationRequestJson(){
         Protocol protocol = new Protocol();
-        protocol.setResource("Location");
+        protocol.setResource("location");
         protocol.setAction("findAllLocation");
         
         Gson gson = new Gson();
@@ -78,7 +78,8 @@ public class LocationAccessImplSockets implements ILocationAccess{
         }
         if (jsonResponse == null) {
             return null;
-           // throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+            
+           //throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
         } else {
             if (jsonResponse.contains("error")) {
                 //Devolvió algún error
