@@ -122,7 +122,7 @@ public class ShoppingAccessImplSockets implements IShoppingAccess{
         Protocol protocol = new Protocol();
         protocol.setResource("shopping");
         protocol.setAction("post");
-        protocol.addParameter("shoppingId",shopping.getShoppingId().toString());
+//        protocol.addParameter("shoppingId",shopping.getShoppingId().toString());
         protocol.addParameter("userBuyerId",shopping.getUserBuyerId().toString());
         protocol.addParameter("productId",shopping.getProductId().toString());
         

@@ -68,7 +68,7 @@ public class SellerIncomeAccessImplSockets implements ISellerIncomeAccess{
         Protocol protocol = new Protocol();
         protocol.setResource("sellerIncome");
         protocol.setAction("post");
-        protocol.addParameter("SellerIncomeId",sellerIncome.getSellerIncomeId().toString());
+//        protocol.addParameter("SellerIncomeId",sellerIncome.getSellerIncomeId().toString());
         protocol.addParameter("income",sellerIncome.getIncome().toString());
         protocol.addParameter("ShoppingId",sellerIncome.getShoppingId().toString());
         

@@ -13,9 +13,7 @@ import co.unicauca.openmarket.client.domain.services.ProductService;
 import co.unicauca.openmarket.client.domain.services.SellerIncomeService;
 import co.unicauca.openmarket.client.domain.services.ShoppingService;
 import co.unicauca.openmarket.client.domain.services.UserService;
-import co.unicauca.openmarket.client.presentation.GUICategory;
 import co.unicauca.openmarket.client.presentation.GUILogin;
-import co.unicauca.openmarket.client.presentation.GUIProducts;
 
 
 public class Main {
@@ -64,7 +62,8 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUILogin guiLogin = new GUILogin(userService,productService, categoryService,locationService);
+                GUILogin guiLogin = new GUILogin(userService,productService, categoryService,locationService, 
+                        shoppingService, sellerIncomeService);
                 guiLogin.setVisible(true);
                 guiLogin.setLocationRelativeTo(null); //centrar panel
             }

@@ -1,14 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.Category;
+import co.unicauca.openmarket.client.domain.Location;
 import co.unicauca.openmarket.client.domain.Product;
+import co.unicauca.openmarket.client.domain.Shopping;
 import co.unicauca.openmarket.client.domain.User;
+import co.unicauca.openmarket.client.domain.services.CategoryService;
+import co.unicauca.openmarket.client.domain.services.LocationService;
 import co.unicauca.openmarket.client.domain.services.ProductService;
+import co.unicauca.openmarket.client.domain.services.SellerIncomeService;
+import co.unicauca.openmarket.client.domain.services.ShoppingService;
+import co.unicauca.openmarket.client.domain.services.UserService;
+import co.unicauca.openmarket.client.infra.Messages;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,35 +27,45 @@ public class GUIUserBuyer extends javax.swing.JFrame {
     
     private User user;
     private ProductService productService;
+    private ShoppingService shoppingService;
+    private SellerIncomeService sellerIncomeService;
+    private UserService userService;
+    
+    private List<Product> lstProducts;
+    int FilaSelec = -1;
+             
     /**
      * Creates new form GuiUserSeller
      */
-    public GUIUserBuyer(User user, ProductService productService) {
+    public GUIUserBuyer(User user, ProductService productService,ShoppingService shoppingService,
+            SellerIncomeService sellerIncomeService,UserService userService, boolean isInvited) {
         
         initComponents();
-        this.user=user;
-        this.productService=productService;
-        llenarTablaProductos();
+        this.user = user;
+        this.productService = productService;
+        this.shoppingService = shoppingService;
+        this.lstProducts = new ArrayList<>();
+        this.sellerIncomeService = sellerIncomeService;
+        this.userService = userService;
+        llenarTablaProductos(null);
     }
     
-    private void llenarTablaProductos() {
-        
-            List<Product> lstProducts = productService.findByUserSeller(user.getUserId());
-            Object matriz [][] = new Object [lstProducts.size()][8];
-            for(int i=0;i<lstProducts.size();i++) {
-                matriz [i][0] = lstProducts.get(i).getProductId();
-                matriz [i][1] = lstProducts.get(i).getName();
-                matriz [i][2] = lstProducts.get(i).getDescription();
-                matriz [i][3] = lstProducts.get(i).getPrice();
-                matriz [i][4] = lstProducts.get(i).getState();
-                matriz [i][5] = lstProducts.get(i).getStock();
-                matriz [i][6] = lstProducts.get(i).getCategoryId();
-                matriz [i][7] = lstProducts.get(i).getLocation();
+    private void llenarTablaProductos(List<Product> lstProducts) {
+            this.lstProducts = lstProducts == null ? productService.findAllProducts() : lstProducts ; 
+            Object matriz [][] = new Object [this.lstProducts.size()][6];
+            for(int i=0;i<this.lstProducts.size();i++) {
+                matriz [i][0] = this.lstProducts.get(i).getProductId();
+                matriz [i][1] = this.lstProducts.get(i).getName();
+                matriz [i][2] = this.lstProducts.get(i).getDescription();
+                matriz [i][3] = this.lstProducts.get(i).getPrice();
+//                matriz [i][4] = this.lstProducts.get(i).getState();
+                matriz [i][4] = this.lstProducts.get(i).getStock();
+                matriz [i][5] = this.lstProducts.get(i).getUserSellerId();
+//                matriz [i][7] = this.lstProducts.get(i).getLocation();
             }
             this.jTableProductos.setModel(new DefaultTableModel(
-                                    matriz,
-                new String [] {"Codigo","Nombre","Descripcion","Precio","Estado",
-                    "Cantidad","Categoria","Ubicacion"}
+                matriz,
+                new String [] {"ID","Nombre", "Descripción", "Precio", "Stock disponible", "Vendedor"}
             )); 
     }
 
@@ -75,18 +93,18 @@ public class GUIUserBuyer extends javax.swing.JFrame {
 
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Descripción", "Precio", "Stock disponible"
+                "ID", "Nombre", "Descripción", "Precio", "Cantidad"
             }
         ));
         jScrollPane1.setViewportView(jTableProductos);
@@ -181,7 +199,7 @@ public class GUIUserBuyer extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jButtonComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -201,8 +219,17 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del boton de comprar productos
+     * @param evt evento que dispara la acción
+     */
     private void jButtonComprarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarProductoActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            buyProduct();
+        } catch (Exception ex) {
+            Logger.getLogger(GUIUserBuyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonComprarProductoActionPerformed
 
     /**
@@ -211,42 +238,65 @@ public class GUIUserBuyer extends javax.swing.JFrame {
      */
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         // TODO add your handling code here:
+        String search = this.jTextFieldSearch.getText().trim();
+        searchProducts(search);
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
+    
+    /**
+     * Funcionalidades 
+     */
+    private void searchProducts(String search){
+        //busqueda por name y description
+        this.lstProducts = this.productService.findAllByNameAndDescription(search);
+        //actulizo la tabla
+        llenarTablaProductos(this.lstProducts);
+    }
+    private void  buyProduct() throws Exception{
+        Product product = new Product();
+        product = productSelected();
+        if(product != null && product.getProductId() != 0){
+           Shopping shopping = new Shopping();
+           shopping.setUserBuyerId(this.user.getUserId());
+           shopping.setProductId(product.getProductId());
+           
+           //Pasarela de pago
+           callJDialogPayment(shopping, product);
+           
+           
+           this.shoppingService.save(shopping);
+        }else{
+            Messages.warningMessage("ERROR! no ha seleccionado ninguna fila de la tabla", "Comprar producto");
+        }
+    }
+    
+    private void callJDialogPayment(Shopping shopping, Product product){
+        JDialogPaymentgateway objJDialogPayment = new JDialogPaymentgateway(this,false,this.shoppingService, this.productService, 
+                this.sellerIncomeService, this.userService, shopping, user);
+         objJDialogPayment.setVisible(true);
+        objJDialogPayment.setLocationRelativeTo(null);
+    }
+     /**
+     * Metodo para obtener los valores de una fila de la tabla correspondientes a un producto. 
+     * @return 
+     */
+    public Product productSelected() {//posible modificacion
+        FilaSelec = this.jTableProductos.getSelectedRow();
+        Product product = new Product();
+        if (FilaSelec >= 0) {
+            product.setProductId(Long.parseLong(this.jTableProductos.getValueAt(FilaSelec, 0).toString()));
+            product.setName(this.jTableProductos.getValueAt(FilaSelec, 1).toString());
+            product.setDescription(this.jTableProductos.getValueAt(FilaSelec, 2).toString());
+            product.setPrice(Double.parseDouble(this.jTableProductos.getValueAt(FilaSelec, 3).toString()));
+            product.setStock(Integer.parseInt(this.jTableProductos.getValueAt(FilaSelec, 4).toString()));
+            product.setUserSellerId(Long.parseLong(this.jTableProductos.getValueAt(FilaSelec, 5).toString()));
+        }
+        return product;
+    }
+    
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GuiUserSeller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GuiUserSeller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GuiUserSeller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GuiUserSeller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GuiUserSeller().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonComprarProducto;

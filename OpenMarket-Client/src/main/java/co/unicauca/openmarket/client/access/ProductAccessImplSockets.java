@@ -60,7 +60,7 @@ public class ProductAccessImplSockets implements IProductAccess {
 
     @Override
     public boolean edit(Product producto)throws Exception {
-          boolean bandera=false;
+        boolean bandera=false;
         String jsonResponse = null;
         String requestJson = doEditproductRequestJson(producto);
         try {
@@ -254,9 +254,6 @@ public class ProductAccessImplSockets implements IProductAccess {
         protocol.addParameter("name",newProduct.getName());
         protocol.addParameter("description", newProduct.getDescription());
         protocol.addParameter("price", newProduct.getPrice().toString());
-        
-        System.out.println("PRUEBAAAAAAA: "+newProduct.getState());
-        
         protocol.addParameter("state", newProduct.getState());
         protocol.addParameter("stock", newProduct.getStock().toString());
         protocol.addParameter("CategoryId", newProduct.getCategoryId().toString());
@@ -368,7 +365,6 @@ public class ProductAccessImplSockets implements IProductAccess {
 
         return listProduct;
     }
-
     
     private String doEditproductRequestJson(Product producto) {
         Protocol protocol =new Protocol();

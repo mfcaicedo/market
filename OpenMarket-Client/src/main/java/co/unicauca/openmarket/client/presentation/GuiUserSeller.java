@@ -74,7 +74,10 @@ public class GuiUserSeller extends javax.swing.JFrame {
             )); 
     }
     
-    //FUNCION QUE ME PERMITE MODIFICAR UN ESTUDIANTE SELECCIONADO
+    /**
+     * Metodo para obtener los valores de una fila de la tabla correspondientes a un producto. 
+     * @return 
+     */
     public Product productSelected() {//posible modificacion
         //RECUPERAMOS LA INFORMACION DE LA FILA SECCIONADA EN LA TABLA
 

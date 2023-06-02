@@ -118,7 +118,19 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public boolean edit(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            String sql = "UPDATE users "
+                    + "SET score = ? WHERE userId=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setFloat(1, user.getScore());
+            pstmt.setLong(1, user.getUserId());
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        return false;
     }
 
     @Override

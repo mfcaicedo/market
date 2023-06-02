@@ -69,7 +69,7 @@ public class ShoppingRepository implements IShoppingRepository {
                 return false;
             }
             //this.connect();
-            String sql = "INSERT INTO products (userBuyerId, productId) "
+            String sql = "INSERT INTO shopping (userBuyerId, productId) "
                     + "VALUES ( ?, ? )";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, shopping.getUserBuyerId());

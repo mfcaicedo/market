@@ -228,12 +228,12 @@ public class ProductRepository implements IProductRepository {
     public List<Product> findAllByNameAndDescription(String search) {
           List<Product> products = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM products  "
-                    + "WHERE name LIKE '%?%' OR description LIKE %?% ";
+            String sql = "SELECT * FROM products "
+                    + "WHERE name LIKE ? OR description LIKE ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, search);
-            pstmt.setString(2, search);
+            pstmt.setString(1, "%"+search+"%" );
+            pstmt.setString(2, "%"+search+"%" );
 
             ResultSet res = pstmt.executeQuery();
             while (res.next()) {

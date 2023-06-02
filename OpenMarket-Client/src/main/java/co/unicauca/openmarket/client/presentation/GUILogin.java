@@ -5,10 +5,13 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.SellerIncome;
 import co.unicauca.openmarket.client.domain.User;
 import co.unicauca.openmarket.client.domain.services.CategoryService;
 import co.unicauca.openmarket.client.domain.services.LocationService;
 import co.unicauca.openmarket.client.domain.services.ProductService;
+import co.unicauca.openmarket.client.domain.services.SellerIncomeService;
+import co.unicauca.openmarket.client.domain.services.ShoppingService;
 import co.unicauca.openmarket.client.domain.services.UserService;
 import co.unicauca.openmarket.client.infra.Messages;
 import java.util.logging.Level;
@@ -25,18 +28,23 @@ public class GUILogin extends javax.swing.JFrame {
     private ProductService productService;
     private CategoryService categoryService;
     private LocationService locationService;
+    private ShoppingService shoppingService;
+    private SellerIncomeService sellerIncomeService;
     private User userLogin;
 
     /**
      * Creates new form GUILogin
      */
     public GUILogin(UserService userService, ProductService productService,
-            CategoryService categoryService, LocationService locationService) {
+            CategoryService categoryService, LocationService locationService, ShoppingService shoppingService, 
+            SellerIncomeService sellerIncomeService) {
         initComponents();
         this.userService = userService;
-        this.productService= productService;
-        this.categoryService= categoryService;
-        this.locationService=locationService;
+        this.productService = productService;
+        this.categoryService = categoryService;
+        this.locationService = locationService;
+        this.shoppingService = shoppingService;
+        this.sellerIncomeService = sellerIncomeService;
         userLogin = new User();
     }
 
@@ -53,12 +61,12 @@ public class GUILogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jlabelUsername = new javax.swing.JLabel();
-        jtxtPassword = new javax.swing.JTextField();
         jlabelPassword = new javax.swing.JLabel();
         jtxtUsername1 = new javax.swing.JTextField();
         jButtonLogin = new javax.swing.JButton();
         jButtonLoginInvitado = new javax.swing.JButton();
         jlabelUsername2 = new javax.swing.JLabel();
+        jPasswordFieldUser = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +91,11 @@ public class GUILogin extends javax.swing.JFrame {
         });
 
         jButtonLoginInvitado.setText("Iniciar como invitado");
+        jButtonLoginInvitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginInvitadoActionPerformed(evt);
+            }
+        });
 
         jlabelUsername2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jlabelUsername2.setText("Si no estás registrado puedes iniciar como invitado");
@@ -94,7 +107,7 @@ public class GUILogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtPassword)
+                    .addComponent(jPasswordFieldUser)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -119,9 +132,9 @@ public class GUILogin extends javax.swing.JFrame {
                 .addComponent(jlabelUsername)
                 .addGap(59, 59, 59)
                 .addComponent(jlabelPassword)
-                .addGap(18, 18, 18)
-                .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPasswordFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jButtonLogin)
                 .addGap(18, 18, 18)
                 .addComponent(jlabelUsername2)
@@ -166,60 +179,61 @@ public class GUILogin extends javax.swing.JFrame {
         verifyLogin();
         
     }//GEN-LAST:event_jButtonLoginActionPerformed
+    /**
+     * Accón para iniciar como invitado 
+     * @param evt 
+     */
+    private void jButtonLoginInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginInvitadoActionPerformed
+        try {
+            frameUserBuyer(true);
+        } catch (Exception ex) {
+            Logger.getLogger(GUILogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonLoginInvitadoActionPerformed
     
     private void verifyLogin(){
         String username = this.jtxtUsername1.getText().trim();
-        String password = this.jtxtPassword.getText().trim();
+        String password = this.jPasswordFieldUser.getText();
         
         try {
             userLogin = this.userService.findByUsernameAndPassword(username, password);
             
             if(userLogin!=null){
-               Messages.showMessageDialog("Inicio de sesion exitoso"+"Bienvenido: "+username, "Atención");
+               Messages.showMessageDialog("Inicio de sesion exitoso"+" Bienvenido: "+username, "Inicio de sesión");
                if(userLogin.getRole().toString().equals("VENDEDOR")){
                    frameUserSeller();
+               }else if(userLogin.getRole().toString().equals("COMPRADOR")){
+                   frameUserBuyer(false);
                }
             }else{
-               Messages.showMessageDialog("No existe el usuario, verifica credenciales", "Atención");
+               Messages.errorMessage("No existe el usuario, verifica credenciales", "Inicio de sesión");
             }
         } catch (Exception ex) {
             Logger.getLogger(GUILogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
-     * @param args the command line arguments
+     * Funcionalidades 
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GUILogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUILogin().setVisible(true);
-//            }
-//        });
-//    }
+    
+    private void frameUserSeller() throws Exception{
+        GuiUserSeller guiUserSeller = new GuiUserSeller(userLogin, productService, categoryService, locationService);
+        guiUserSeller.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        guiUserSeller.setVisible(true);
+        guiUserSeller.setLocationRelativeTo(null);
+    }
+    private void frameUserBuyer(boolean isInvited) throws Exception{
+        
+        GUIUserBuyer guiUserBuyer = new GUIUserBuyer(userLogin, productService, shoppingService,sellerIncomeService, userService, isInvited);
+        guiUserBuyer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        guiUserBuyer.setVisible(true);
+        guiUserBuyer.setLocationRelativeTo(null);
+    }
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
@@ -227,20 +241,14 @@ public class GUILogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordFieldUser;
     private javax.swing.JLabel jlabelPassword;
     private javax.swing.JLabel jlabelUsername;
     private javax.swing.JLabel jlabelUsername2;
-    private javax.swing.JTextField jtxtPassword;
     private javax.swing.JTextField jtxtUsername1;
     // End of variables declaration//GEN-END:variables
 
-    private void frameUserSeller() throws Exception{
-        GuiUserSeller guiUserSeller = new GuiUserSeller(userLogin,productService, categoryService, locationService);
-        guiUserSeller.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        guiUserSeller.setVisible(true);
-        guiUserSeller.setLocationRelativeTo(null);
-    }
+   
 
 
 }

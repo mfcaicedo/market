@@ -106,6 +106,10 @@ public class OpenMarketHandler extends ServerHandler {
                     // autenticacion
                     response = processLoginUser(protocolRequest);
                 }
+                if (protocolRequest.getAction().equals("editScore")){
+                    // listar compras
+                    response = processScoreSeller(protocolRequest);
+                }
                 break;
             case "shopping":
                 if (protocolRequest.getAction().equals("post")){
@@ -316,6 +320,16 @@ public class OpenMarketHandler extends ServerHandler {
         user = serviceUser.findByUsernameAndPassword(username, password);
       return objectToJSON(user);
     }
+    private String processScoreSeller(Protocol protocolRequest){
+        
+        User user = new User();
+        
+        user.setUserId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        user.setScore(Float.parseFloat(protocolRequest.getParameters().get(1).getValue()));
+        boolean response = serviceUser.edit(user);
+        String respuesta=String.valueOf(response);
+        return respuesta;
+    }
     /**
      * Controlador que invoca el servicio de guardar la compra 
      * @param protocolRequest json con la información a guardar.
@@ -324,9 +338,9 @@ public class OpenMarketHandler extends ServerHandler {
     private String processSaveShopping(Protocol protocolRequest){
         Shopping shopping = new Shopping();
         // Reconstruir el prodcucto  a partir de lo que viene en los parámetros
-        shopping.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
-        shopping.setUserBuyerId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
-        shopping.setProductId(Long.parseLong(protocolRequest.getParameters().get(2).getValue()));
+     //   shopping.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        shopping.setUserBuyerId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        shopping.setProductId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
         
         boolean response = serviceShopping.save(shopping);
         String respuesta = String.valueOf(response);
@@ -348,9 +362,9 @@ public class OpenMarketHandler extends ServerHandler {
     private String processSaveSellerIncome(Protocol protocolRequest){
         SellerIncome seller = new SellerIncome();
         // Reconstruir el prodcucto  a partir de lo que viene en los parámetros
-        seller.setSellerIncomeId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
-        seller.setIncome(Double.parseDouble(protocolRequest.getParameters().get(1).getValue()));
-        seller.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(2).getValue()));
+        //seller.setSellerIncomeId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        seller.setIncome(Double.parseDouble(protocolRequest.getParameters().get(0).getValue()));
+        seller.setShoppingId(Long.parseLong(protocolRequest.getParameters().get(1).getValue()));
         
         boolean response = serviceSellerIncome.save(seller);
         String respuesta = String.valueOf(response);

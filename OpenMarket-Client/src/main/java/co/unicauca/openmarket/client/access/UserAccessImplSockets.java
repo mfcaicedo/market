@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package co.unicauca.openmarket.client.access;
 
-import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.User;
 import co.unicauca.openmarket.client.infra.OpenMarketSocket;
 import co.unicauca.openmarket.commons.infra.JsonError;
@@ -34,7 +29,40 @@ public class UserAccessImplSockets implements IUserAccess{
 
     @Override
     public boolean edit(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean bandera = false;
+        String jsonResponse = null;
+        String requestJson = doEdituserRequestJson(user);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendRequest(requestJson);
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+         if (jsonResponse == null) {
+            try {
+                throw new Exception("Oye No se pudo conectar con el servidor, por favor revisa la red o que el servidor esté escuchando.  ");
+            } catch (Exception ex) {
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            if (jsonResponse.contains(" Hay error")) {
+                //Devolvió algún error
+                Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse+"aqi estoy");
+                try {
+                    throw new Exception(extractMessages(jsonResponse));
+                } catch (Exception ex) {
+                    Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
+            } else {
+                //Encontró el customer
+                Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+user.getName());
+                bandera=true;
+            }
+        }
+        return bandera;
     }
 
     @Override
@@ -89,11 +117,23 @@ public class UserAccessImplSockets implements IUserAccess{
     
     
     private String doFindUserUsernameAndPasswordRequestJson(String username, String password) {
-       Protocol protocol = new Protocol();
+        Protocol protocol = new Protocol();
         protocol.setResource("user");
         protocol.setAction("login");
         protocol.addParameter("username",username);
         protocol.addParameter("password",password);
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
+    private String doEdituserRequestJson(User user){
+        Protocol protocol = new Protocol();
+        protocol.setResource("user");
+        protocol.setAction("editScore");
+        protocol.addParameter("userId", user.getUserId().toString());
+        protocol.addParameter("score", String.valueOf(user.getScore()));
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
