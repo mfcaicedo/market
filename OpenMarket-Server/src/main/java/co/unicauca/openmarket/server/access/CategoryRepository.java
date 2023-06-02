@@ -25,16 +25,18 @@ public class CategoryRepository implements ICategoryRepository {
     
      private void insertInit() {
         try {
-            String sql = "INSERT INTO categories (name) "
-                    + "VALUES ( ? )";
+            String sql = "INSERT INTO categories (categoryId, name) "
+                    + "VALUES ( ?,? )";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "Entretenimiento");
+            pstmt.setInt(1, 1);
+            pstmt.setString(2, "Entretenimiento");
             pstmt.executeUpdate();
             
-            sql = "INSERT INTO categories (name) "
-                    + "VALUES ( ? )";
+            sql = "INSERT INTO categories (categoryId, name) "
+                    + "VALUES ( ?,? )";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "Juguetería");
+            pstmt.setInt(1, 2);
+            pstmt.setString(2, "Juguetería");
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,8 +49,8 @@ public class CategoryRepository implements ICategoryRepository {
             if (newCategory == null || newCategory.getCategoryId()==null) {
                 return false;
             }
-            String sql = "INSERT INTO categories ( name) "
-                    + "VALUES ( ?)";
+            String sql = "INSERT INTO categories (categoryId, name) "
+                    + "VALUES ( ?,? )";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, newCategory.getCategoryId());
             pstmt.setString(2, newCategory.getName());

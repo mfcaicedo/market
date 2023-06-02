@@ -42,7 +42,7 @@ public class Messages {
      * @param title título de la ventana
      */
     public static void successMessage(String mns, String title) {
-        JOptionPane.showMessageDialog(null, mns, title, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, mns, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

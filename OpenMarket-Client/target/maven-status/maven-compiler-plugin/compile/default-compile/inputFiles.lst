@@ -2,6 +2,7 @@ D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\main\Main.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ILocationAccess.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GUIProductsFind.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\JDialogScore.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\GuiUserSeller.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ShoppingAccessImplSockets.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\ProductService.java
@@ -30,9 +31,9 @@ D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\infra\OpenMarketSocket.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\CategoryAccessImplSockets.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\Product.java
+D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\JDialogPaymentgateway.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\ISellerIncomeAccess.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\IShoppingAccess.java
-D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\presentation\JPanelAddProduct.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\services\UserService.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\access\UserAccessImplSockets.java
 D:\UNIVERSIDAD\openMarket\OpenMarket-Client\src\main\java\co\unicauca\openmarket\client\domain\UserRole.java

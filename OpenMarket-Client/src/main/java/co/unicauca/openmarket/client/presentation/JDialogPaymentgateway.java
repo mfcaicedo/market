@@ -36,7 +36,7 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
      */
     public JDialogPaymentgateway(java.awt.Frame parent, boolean modal, ShoppingService shoppingService, 
             ProductService productService, SellerIncomeService sellerIncomeService, UserService userService, 
-            Shopping shopping, User user) {
+            Shopping shopping, User user, Double price) {
         super(parent, modal);
         this.shoppingService = shoppingService;
         this.productService = productService;
@@ -45,6 +45,7 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
         this.shopping = shopping;
         this.user = user;
         initComponents();
+        this.jLabelTotalPagar.setText(price.toString());
     }
 
     /**
@@ -60,10 +61,10 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanelCenter = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldName = new javax.swing.JTextField();
+        jTextFieldCedula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldPrice = new javax.swing.JTextField();
+        jTextFieldNumeroCuenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabelTotalPagar = new javax.swing.JLabel();
         jComboBoxTipoCuenta = new javax.swing.JComboBox<>();
@@ -71,7 +72,10 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 157, 243));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PASARELA DE PAGO");
 
@@ -92,27 +96,35 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jPanelCenter.setBackground(new java.awt.Color(0, 157, 243));
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Número de cedula:");
 
-        jTextFieldName.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNameActionPerformed(evt);
+                jTextFieldCedulaActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tipo de cuenta:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Número de cuenta");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Total a pagar:");
 
         jComboBoxTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Corriente", "Ahorros", "Credito", "Debido" }));
 
+        jButtonConfirmarPago.setBackground(new java.awt.Color(0, 70, 144));
         jButtonConfirmarPago.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonConfirmarPago.setForeground(new java.awt.Color(255, 255, 255));
         jButtonConfirmarPago.setText("Confirmar pago");
         jButtonConfirmarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,8 +139,8 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldName)
-                    .addComponent(jTextFieldPrice)
+                    .addComponent(jTextFieldCedula)
+                    .addComponent(jTextFieldNumeroCuenta)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -152,7 +164,7 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -160,7 +172,7 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -194,64 +206,71 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameActionPerformed
+    private void jTextFieldCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNameActionPerformed
+    }//GEN-LAST:event_jTextFieldCedulaActionPerformed
     /**
      * Acción del boton para confirmar pago. 
      * @param evt evento que dispara la accion
      */
     private void jButtonConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagoActionPerformed
-        try {
-            //TODO guardar compra.
-            this.shoppingService.save(this.shopping);
-            
-            //TODO 2. actualizar el stock.
-            //TODO 2.1. buscar el producto
-            Product product = this.productService.findProductById(shopping.getProductId());
-            product.setStock(product.getStock() - 1);
-            //this.product.setStock(this.product.getStock() - 1);
-            this.productService.editProduct(product);
-            
-            Shopping shoppingFind = this.shoppingService.findByProductId(product.getProductId());
-            
-            
-            //TODO 3. guardar la comisión.
-            Double commission = 0.12 * product.getPrice();
-            SellerIncome sellerIncome = new SellerIncome();
-            sellerIncome.setIncome(commission);
-            sellerIncome.setShoppingId(shoppingFind.getShoppingId());
-            
-            boolean bandera=this.sellerIncomeService.save(sellerIncome);
-            
-            
-            //TODO 4. Llamar a un jDialog para la puntuación.
-            int result = JOptionPane.showConfirmDialog(this, " Deseas puntuar al vendedor? ", "Puntuador comprador", JOptionPane.OK_CANCEL_OPTION);
-            if (result == JOptionPane.OK_OPTION) {
-            
-                if(bandera){
-                
-                    JDialogScore objJDScore = new JDialogScore(this,false, this.userService,product.getUserSellerId());
-                    objJDScore.setVisible(true);
-                    objJDScore.setLocationRelativeTo(null);
-
-                    //this.dispose();
-                
-                }else{
-                
-                }
-            
-            } 
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(JDialogPaymentgateway.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       paymentProduct();
     }//GEN-LAST:event_jButtonConfirmarPagoActionPerformed
 
     /**
-     * Metodos  
+     * Metodo para realizar el pago del producto. 
      */
+    private void paymentProduct() {
+        if (!this.jTextFieldCedula.getText().equals("") && !this.jTextFieldNumeroCuenta.getText().equals("")) {
+            try {
+                //TODO guardar compra.
+                this.shoppingService.save(this.shopping);
+                //TODO 2. actualizar el stock.
+                //TODO 2.1. buscar el producto
+                Product product = this.productService.findProductById(shopping.getProductId());
+                System.out.println("id: " + product.getProductId());
+                System.out.println("id: " + product.getName());
+                System.out.println("id: " + product.getDescription());
+                System.out.println("estadoooo: " + product.getState());
+                System.out.println("id: " + product.getPrice());
+                System.out.println("id: " + product.getStock());
+                System.out.println("id: " + product.getCategoryId());
+                System.out.println("id: " + product.getUserSellerId());
+                product.setStock(product.getStock() - 1);
+                //TODO 2.3 Actualizar el stock del producto
+                this.productService.editProduct(product);
+
+                Shopping shoppingFind = this.shoppingService.findByProductId(product.getProductId());
+
+                //TODO 3. guardar la comisión en la tabla SellerIncome del vendedor.
+                Double commission = 0.12 * product.getPrice();
+                SellerIncome sellerIncome = new SellerIncome();
+                sellerIncome.setIncome(product.getPrice() - commission);
+                sellerIncome.setShoppingId(shoppingFind.getShoppingId());
+
+                boolean bandera = this.sellerIncomeService.save(sellerIncome);
+
+                //TODO 4. Llamar a un jDialog para la puntuación.
+                int result = JOptionPane.showConfirmDialog(this, "¿Deseas calificar al vendedor? ", "Calificación servicio", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    if (bandera) {
+                        JDialogScore objJDScore = new JDialogScore(this, false, this.userService, product.getUserSellerId());
+                        objJDScore.setVisible(true);
+                        objJDScore.setLocationRelativeTo(null);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Compra realizada exitosamente ", "Compra producto", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(JDialogPaymentgateway.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes digitar todos los campos", "Compra producto", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmarPago;
@@ -264,7 +283,7 @@ public class JDialogPaymentgateway extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelTotalPagar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCenter;
-    private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldPrice;
+    private javax.swing.JTextField jTextFieldCedula;
+    private javax.swing.JTextField jTextFieldNumeroCuenta;
     // End of variables declaration//GEN-END:variables
 }

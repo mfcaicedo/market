@@ -153,11 +153,14 @@ public class GuiUserSeller extends javax.swing.JFrame {
         jButtonLlenarTabla = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButtonCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanelOptions.setBackground(new java.awt.Color(0, 157, 243));
+
+        jButtonAgregar.setBackground(new java.awt.Color(0, 70, 144));
         jButtonAgregar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonAgregar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +168,9 @@ public class GuiUserSeller extends javax.swing.JFrame {
             }
         });
 
+        jButtonModificar.setBackground(new java.awt.Color(0, 70, 144));
         jButtonModificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonModificar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +178,9 @@ public class GuiUserSeller extends javax.swing.JFrame {
             }
         });
 
+        JButtonEliminar.setBackground(new java.awt.Color(205, 40, 56));
         JButtonEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        JButtonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         JButtonEliminar.setText("Eliminar");
         JButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +188,9 @@ public class GuiUserSeller extends javax.swing.JFrame {
             }
         });
 
+        jButtonSuspender.setBackground(new java.awt.Color(0, 70, 144));
         jButtonSuspender.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonSuspender.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSuspender.setText("Suspender");
         jButtonSuspender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,6 +199,7 @@ public class GuiUserSeller extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Opciones");
 
@@ -223,6 +233,8 @@ public class GuiUserSeller extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelCenter.setBackground(new java.awt.Color(0, 157, 243));
+
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -242,8 +254,12 @@ public class GuiUserSeller extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableProductos);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de productos disponibles");
 
+        jButtonLlenarTabla.setBackground(new java.awt.Color(0, 70, 144));
+        jButtonLlenarTabla.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonLlenarTabla.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLlenarTabla.setText("Actualizar Tabla");
         jButtonLlenarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +274,7 @@ public class GuiUserSeller extends javax.swing.JFrame {
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -279,35 +295,27 @@ public class GuiUserSeller extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(0, 157, 243));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MARKET PLACE");
-
-        jButtonCerrarSesion.setText("Cerrar sesión");
-        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCerrarSesionActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(jButtonCerrarSesion)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCerrarSesion)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -452,14 +460,6 @@ public class GuiUserSeller extends javax.swing.JFrame {
                 Logger.getLogger(GuiUserSeller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_JButtonEliminarActionPerformed
-    /**
-     * Acción del boton de cerrar sesión 
-     * @param evt evento que dispara la acción. 
-     */
-    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
     private void jButtonLlenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLlenarTablaActionPerformed
         try {
@@ -507,7 +507,6 @@ public class GuiUserSeller extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonEliminar;
     private javax.swing.JButton jButtonAgregar;
-    private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonLlenarTabla;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonSuspender;

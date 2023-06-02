@@ -13,6 +13,7 @@ co\unicauca\openmarket\client\presentation\GUIProducts$8.class
 co\unicauca\openmarket\client\presentation\GuiUserSeller$4.class
 co\unicauca\openmarket\client\access\ISellerIncomeAccess.class
 co\unicauca\openmarket\client\presentation\GUIProductsFind.class
+co\unicauca\openmarket\client\presentation\JDialogScore.class
 co\unicauca\openmarket\client\access\LocationAccessImplSockets$1.class
 co\unicauca\openmarket\client\presentation\GUIProducts$1.class
 co\unicauca\openmarket\client\domain\SellerIncome.class
@@ -58,6 +59,7 @@ co\unicauca\openmarket\client\domain\User.class
 co\unicauca\openmarket\client\presentation\GUILogin.class
 co\unicauca\openmarket\client\access\ShoppingAccessImplSockets.class
 co\unicauca\openmarket\client\infra\Messages.class
+co\unicauca\openmarket\client\presentation\JDialogScore$1.class
 co\unicauca\openmarket\client\presentation\GuiUserSeller.class
 co\unicauca\openmarket\client\presentation\GuiUserSeller$2.class
 co\unicauca\openmarket\client\presentation\GUICategory$1.class
@@ -73,6 +75,7 @@ co\unicauca\openmarket\client\presentation\GUILogin$2.class
 co\unicauca\openmarket\client\presentation\GUICategory$4.class
 co\unicauca\openmarket\client\access\Factory.class
 co\unicauca\openmarket\client\presentation\GUIProducts$4.class
+co\unicauca\openmarket\client\presentation\GUIUserBuyer$3.class
 co\unicauca\openmarket\client\domain\Location.class
 co\unicauca\openmarket\client\access\CategoryAccessImplSockets$1.class
 co\unicauca\openmarket\client\domain\Product.class
@@ -81,4 +84,3 @@ co\unicauca\openmarket\client\presentation\GuiUserSeller$3.class
 co\unicauca\openmarket\client\presentation\GUIProducts$7.class
 co\unicauca\openmarket\client\access\ProductAccessImplSockets$1.class
 co\unicauca\openmarket\client\access\LocationAccessImplSockets.class
-co\unicauca\openmarket\client\presentation\GuiUserSeller$6.class

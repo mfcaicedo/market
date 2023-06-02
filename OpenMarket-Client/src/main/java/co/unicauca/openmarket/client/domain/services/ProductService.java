@@ -80,7 +80,7 @@ public class ProductService  {
 
     public boolean editProduct(Product producto) throws Exception{
           
-        Product productoActualizado=new Product();
+        Product productoActualizado = new Product();
         productoActualizado.setProductId(producto.getProductId());
         productoActualizado.setName(producto.getName());
         productoActualizado.setDescription(producto.getDescription());

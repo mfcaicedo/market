@@ -209,6 +209,7 @@ public class ProductRepository implements IProductRepository {
                 prod.setName(res.getString("name"));
                 prod.setDescription(res.getString("description"));
                 prod.setPrice(res.getDouble("price"));
+                prod.setState(res.getString("state"));
                 prod.setStock(res.getInt("stock"));
                 prod.setCategoryId(res.getLong("categoryId"));
                 prod.setLocation(res.getLong("locationId"));
@@ -242,6 +243,7 @@ public class ProductRepository implements IProductRepository {
                 prod.setName(res.getString("name"));
                 prod.setDescription(res.getString("description"));
                 prod.setPrice(res.getDouble("price"));
+                prod.setState(res.getString("state"));
                 prod.setStock(res.getInt("stock"));
                 prod.setCategoryId(res.getLong("categoryId"));
                 prod.setLocation(res.getLong("locationId"));

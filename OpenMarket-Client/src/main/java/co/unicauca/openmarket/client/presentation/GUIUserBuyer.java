@@ -30,7 +30,7 @@ public class GUIUserBuyer extends javax.swing.JFrame {
     private ShoppingService shoppingService;
     private SellerIncomeService sellerIncomeService;
     private UserService userService;
-    
+    private boolean isIvited;
     private List<Product> lstProducts;
     int FilaSelec = -1;
              
@@ -47,9 +47,19 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         this.lstProducts = new ArrayList<>();
         this.sellerIncomeService = sellerIncomeService;
         this.userService = userService;
+        this.isIvited = isInvited;
         llenarTablaProductos(null);
+        verifyIsInvited();
     }
-    
+    private void verifyIsInvited(){
+        if(this.isIvited == true){
+            this.jButtonComprarProducto.setVisible(false);
+        }
+    }
+    /**
+     * Metodo para cargar la tabla de productos 
+     * @param lstProducts 
+     */
     private void llenarTablaProductos(List<Product> lstProducts) {
             this.lstProducts = lstProducts == null ? productService.findAllProducts() : lstProducts ; 
             Object matriz [][] = new Object [this.lstProducts.size()][6];
@@ -85,11 +95,15 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButtonComprarProducto = new javax.swing.JButton();
+        jButtonUpdateTable = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButtonComprarProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 255, 51));
+
+        jPanelCenter.setBackground(new java.awt.Color(0, 157, 243));
 
         jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,9 +124,12 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableProductos);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Busqueda:");
 
+        jButtonSearch.setBackground(new java.awt.Color(0, 70, 144));
         jButtonSearch.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonSearch.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSearch.setText("Buscar");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +138,28 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Listado de productos disponibles!");
+
+        jButtonComprarProducto.setBackground(new java.awt.Color(0, 70, 144));
+        jButtonComprarProducto.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonComprarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonComprarProducto.setText("Comprar producto seleccionado");
+        jButtonComprarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonComprarProductoActionPerformed(evt);
+            }
+        });
+
+        jButtonUpdateTable.setBackground(new java.awt.Color(0, 70, 144));
+        jButtonUpdateTable.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButtonUpdateTable.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonUpdateTable.setText("Actualizar tabla");
+        jButtonUpdateTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
@@ -136,10 +174,15 @@ public class GUIUserBuyer extends javax.swing.JFrame {
                         .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(249, Short.MAX_VALUE))
+                        .addContainerGap(255, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jButtonComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonUpdateTable, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelCenterLayout.setVerticalGroup(
@@ -152,12 +195,19 @@ public class GUIUserBuyer extends javax.swing.JFrame {
                     .addComponent(jButtonSearch))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonComprarProducto)
+                    .addComponent(jButtonUpdateTable))
+                .addGap(30, 30, 30))
         );
 
+        jPanel1.setBackground(new java.awt.Color(0, 157, 243));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MARKET PLACE");
 
@@ -178,30 +228,15 @@ public class GUIUserBuyer extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonComprarProducto.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButtonComprarProducto.setText("Comprar producto seleccionado");
-        jButtonComprarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonComprarProductoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jButtonComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,10 +245,8 @@ public class GUIUserBuyer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCenter, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonComprarProducto)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jPanelCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -241,6 +274,14 @@ public class GUIUserBuyer extends javax.swing.JFrame {
         String search = this.jTextFieldSearch.getText().trim();
         searchProducts(search);
     }//GEN-LAST:event_jButtonSearchActionPerformed
+    /**
+     * Acción del boton que actualiza la tabla de productos. 
+     * @param evt 
+     */
+    private void jButtonUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateTableActionPerformed
+        // TODO add your handling code here:
+        llenarTablaProductos(null);
+    }//GEN-LAST:event_jButtonUpdateTableActionPerformed
 
     
     /**
@@ -255,16 +296,15 @@ public class GUIUserBuyer extends javax.swing.JFrame {
     private void  buyProduct() throws Exception{
         Product product = new Product();
         product = productSelected();
-        if(product != null && product.getProductId() != 0){
+        if(this.FilaSelec != -1){
            Shopping shopping = new Shopping();
            shopping.setUserBuyerId(this.user.getUserId());
            shopping.setProductId(product.getProductId());
-           
            //Pasarela de pago
            callJDialogPayment(shopping, product);
-           
-           
-           this.shoppingService.save(shopping);
+//           this.shoppingService.save(shopping);
+            //la fila seleccionada se limpia
+            this.FilaSelec = -1;
         }else{
             Messages.warningMessage("ERROR! no ha seleccionado ninguna fila de la tabla", "Comprar producto");
         }
@@ -272,7 +312,7 @@ public class GUIUserBuyer extends javax.swing.JFrame {
     
     private void callJDialogPayment(Shopping shopping, Product product){
         JDialogPaymentgateway objJDialogPayment = new JDialogPaymentgateway(this,false,this.shoppingService, this.productService, 
-                this.sellerIncomeService, this.userService, shopping, user);
+                this.sellerIncomeService, this.userService, shopping, user, product.getPrice());
          objJDialogPayment.setVisible(true);
         objJDialogPayment.setLocationRelativeTo(null);
     }
@@ -301,6 +341,7 @@ public class GUIUserBuyer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonComprarProducto;
     private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonUpdateTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
