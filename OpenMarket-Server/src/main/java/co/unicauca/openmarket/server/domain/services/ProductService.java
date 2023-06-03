@@ -51,4 +51,8 @@ public class ProductService {
     public synchronized List<Product> findByCategory(String categoryName){
         return repo.findByCategory(categoryName);
     }
+    
+    public synchronized List<Product> findByUserSeller(Long id){
+        return repo.findByUserSeller(id);
+    }
 }

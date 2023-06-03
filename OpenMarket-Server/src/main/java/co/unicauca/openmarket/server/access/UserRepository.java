@@ -81,11 +81,11 @@ public class UserRepository implements IUserRepository{
             String sql = "INSERT INTO users (name, lastname, username, password, email, cellphone, role, billingType, birthdate, score) "
                     + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "Nicolas");
-            pstmt.setString(2, "Lopez");
-            pstmt.setString(3, "nlopez");
+            pstmt.setString(1, "Admin");
+            pstmt.setString(2, "Admin");
+            pstmt.setString(3, "admin");
             pstmt.setString(4, "1234");
-            pstmt.setString(5, "nlopez@gmail.com");
+            pstmt.setString(5, "admin@gmail.com");
             pstmt.setInt(6, 32345);
             pstmt.setString(7, UserRole.VENDEDOR.toString());
             pstmt.setString(8, "Factura electrónica");
@@ -96,11 +96,11 @@ public class UserRepository implements IUserRepository{
             sql = "INSERT INTO users (name, lastname, username, password, email, cellphone, role, birthdate) "
                     + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "Theo");
-            pstmt.setString(2, "Muñoz");
-            pstmt.setString(3, "tmunoz");
+            pstmt.setString(1, "user");
+            pstmt.setString(2, "user");
+            pstmt.setString(3, "user");
             pstmt.setString(4, "1234");
-            pstmt.setString(5, "tmunoz@gmail.com");
+            pstmt.setString(5, "user@gmail.com");
             pstmt.setInt(6, 32345);
             pstmt.setString(7, UserRole.COMPRADOR.toString());
             pstmt.setString(8, "2002-01-20");
@@ -118,7 +118,19 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public boolean edit(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            String sql = "UPDATE users "
+                    + "SET score = ? WHERE userId=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setFloat(1, user.getScore());
+            pstmt.setLong(1, user.getUserId());
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        return false;
     }
 
     @Override
@@ -129,7 +141,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public User findById(Long id) {
         try {
-            String sql = "SELECT * FROM user "
+            String sql = "SELECT * FROM users "
                     + "WHERE userId = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, id);
@@ -175,7 +187,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public User findByUsernameAndPassword(String username, String password) {
          try {
-            String sql = "SELECT * FROM user "
+            String sql = "SELECT * FROM users "
                     + "WHERE username = ? AND password = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);

@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author Libardo Pantoja, Julio A. Hurtado
  */
-class User {
+public class User {
     private Long userId;
     private String name;
     private String lastName;

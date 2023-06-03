@@ -80,5 +80,10 @@ public class ProductRepositoryArrays implements IProductRepository{
     public List<Product> findAllByNameAndDescription(String search) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Product> findByUserSeller(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

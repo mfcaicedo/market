@@ -21,6 +21,8 @@ public interface IProductRepository {
     List<Product> findAllByNameAndDescription(String search);
 
     List<Product> findByName(String pname);
+    
+    List<Product> findByUserSeller(Long id);
 
     List<Product> findByCategory(String categoryName);
 

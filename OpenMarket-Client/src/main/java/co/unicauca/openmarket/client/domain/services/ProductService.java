@@ -33,21 +33,9 @@ public class ProductService  {
     }
     
 
-    public boolean saveProduct(Long id,String name, String description,Long categoryId)throws Exception {
-        
-        Product newProduct = new Product();
-        newProduct.setProductId(id);
-        newProduct.setName(name);
-        newProduct.setDescription(description);
-        newProduct.setCategoryId(categoryId);
-        
-        
-        //Validate product
-        if (newProduct.getName().isEmpty() ) {
-            return false;
-        }
-
-        return repository.save(newProduct);
+    public boolean saveProduct(Product product)throws Exception {
+     
+        return repository.save(product);
 
     }
 
@@ -67,6 +55,13 @@ public class ProductService  {
 
         return products;
     }
+    
+    public List<Product> findAllByNameAndDescription(String search){
+        List<Product> products = new ArrayList<>();
+        products = repository.findAllByNameAndDescription(search);
+        return products;
+    }
+    
     public List<Product> findProductsByCategory(String categoryName) {
         List<Product> products = new ArrayList<>();
         products = repository.findByCategory(categoryName);
@@ -78,14 +73,24 @@ public class ProductService  {
         return repository.delete(id);
        
     }
+    
+    public List<Product> findByUserSeller(Long id){
+        return repository.findByUserSeller(id);
+    }
 
-    public boolean editProduct(Long productId,String name, String description,Long categoryId) throws Exception{
+    public boolean editProduct(Product producto) throws Exception{
           
-        Product producto=new Product();
-        producto.setProductId(productId);
-        producto.setName(name);
-        producto.setDescription(description);
-        producto.setCategoryId(categoryId);
+        Product productoActualizado = new Product();
+        productoActualizado.setProductId(producto.getProductId());
+        productoActualizado.setName(producto.getName());
+        productoActualizado.setDescription(producto.getDescription());
+        productoActualizado.setPrice(producto.getPrice());
+        productoActualizado.setState(producto.getState());
+        productoActualizado.setStock(producto.getStock());
+        productoActualizado.setCategoryId(producto.getCategoryId());
+        productoActualizado.setLocation(producto.getLocation());
+        productoActualizado.setUserSellerId(producto.getUserSellerId());
+        
         //Validate product
         if (producto.getProductId() == null ||producto.getName().isEmpty()) {
             return false;

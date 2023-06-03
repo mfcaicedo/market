@@ -41,6 +41,7 @@ public class ProductRepository implements IProductRepository {
             pstmt.setString(1, newProduct.getName());
             pstmt.setString(2, newProduct.getDescription());
             pstmt.setDouble(3, newProduct.getPrice());
+            System.out.println("PRUEBAAAAAA: "+newProduct.getState());
             pstmt.setString(4, newProduct.getState());
             pstmt.setInt(5, newProduct.getStock());
             pstmt.setLong(6, newProduct.getCategoryId());
@@ -93,8 +94,8 @@ public class ProductRepository implements IProductRepository {
                 + "     categoryId integer,\n"
                 + "     locationId integer NULL,\n"
                 + "     userSellerId integer NULL,\n"
-                + "     FOREIGN KEY (categoryId) REFERENCES categories(categoryId)\n"
-                + "     FOREIGN KEY (locationId) REFERENCES location(locationId)\n"
+                + "     FOREIGN KEY (categoryId) REFERENCES categories(categoryId),\n"
+                + "     FOREIGN KEY (locationId) REFERENCES location(locationId),\n"
                 + "     FOREIGN KEY (userSellerId) REFERENCES users(userId)\n"
                 + ");";
 
@@ -136,6 +137,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean edit(Product product) {
+        
+        System.out.println("PELUCHES: "+product.getProductId());
         try {
             //Validate product
             if (product == null) {
@@ -143,8 +146,8 @@ public class ProductRepository implements IProductRepository {
             }
             //this.connect();
 
-            String sql = "UPDATE  products"
-                    + "SET name=?, description=?,price=?, state=?, stock=?, categoryId=?,locationId=?, userSellerId=?"
+            String sql = "UPDATE  products "
+                    + "SET name=?, description=?, price=?, state=?, stock=?, categoryId=?, locationId=?, userSellerId=? "
                     + "WHERE productId = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -206,6 +209,7 @@ public class ProductRepository implements IProductRepository {
                 prod.setName(res.getString("name"));
                 prod.setDescription(res.getString("description"));
                 prod.setPrice(res.getDouble("price"));
+                prod.setState(res.getString("state"));
                 prod.setStock(res.getInt("stock"));
                 prod.setCategoryId(res.getLong("categoryId"));
                 prod.setLocation(res.getLong("locationId"));
@@ -225,12 +229,12 @@ public class ProductRepository implements IProductRepository {
     public List<Product> findAllByNameAndDescription(String search) {
           List<Product> products = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM products  "
-                    + "WHERE name LIKE '%?%' OR description LIKE %?% ";
+            String sql = "SELECT * FROM products "
+                    + "WHERE name LIKE ? OR description LIKE ? ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, search);
-            pstmt.setString(2, search);
+            pstmt.setString(1, "%"+search+"%" );
+            pstmt.setString(2, "%"+search+"%" );
 
             ResultSet res = pstmt.executeQuery();
             while (res.next()) {
@@ -239,6 +243,7 @@ public class ProductRepository implements IProductRepository {
                 prod.setName(res.getString("name"));
                 prod.setDescription(res.getString("description"));
                 prod.setPrice(res.getDouble("price"));
+                prod.setState(res.getString("state"));
                 prod.setStock(res.getInt("stock"));
                 prod.setCategoryId(res.getLong("categoryId"));
                 prod.setLocation(res.getLong("locationId"));
@@ -330,6 +335,39 @@ public class ProductRepository implements IProductRepository {
         }
 
         return products;
+    }
+
+    @Override
+    public List<Product> findByUserSeller(Long id) {
+        List<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM products  "
+                    + "WHERE userSellerId = ? ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            
+
+            ResultSet res = pstmt.executeQuery();
+            while (res.next()) {
+                Product prod = new Product();
+                prod.setProductId(res.getLong("productId"));
+                prod.setName(res.getString("name"));
+                prod.setDescription(res.getString("description"));
+                prod.setPrice(res.getDouble("price"));
+                prod.setState(res.getString("state"));
+                prod.setStock(res.getInt("stock"));
+                prod.setCategoryId(res.getLong("categoryId"));
+                prod.setLocation(res.getLong("locationId"));
+                prod.setUserSellerId(res.getLong("userSellerId"));
+                products.add(prod);
+            }
+            return products;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }
